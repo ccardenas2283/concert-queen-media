@@ -5,20 +5,17 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-cream pt-20">
       <div className="text-center max-w-md px-4">
-        <span className="font-body text-xs tracking-[0.3em] uppercase text-gold-dark mb-2 block">
+        <p className="font-body text-[11px] tracking-[0.2em] uppercase text-gold-dark mb-3">
           Page Not Found
-        </span>
-        <h1 className="font-display text-6xl md:text-8xl font-bold text-burgundy-dark mb-4">
+        </p>
+        <h1 className="font-display text-7xl md:text-9xl font-bold text-noir mb-4">
           404
         </h1>
-        <p className="font-body text-lg text-charcoal-light mb-8">
+        <p className="font-body text-base text-noir/50 mb-8">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-7 py-3.5 bg-burgundy-dark text-cream font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-burgundy transition-all duration-300"
-        >
-          <ArrowLeft size={16} />
+        <Link href="/" className="btn-primary inline-flex">
+          <ArrowLeft size={15} />
           Back to Home
         </Link>
       </div>

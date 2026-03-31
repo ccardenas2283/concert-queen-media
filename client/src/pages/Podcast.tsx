@@ -1,326 +1,231 @@
 /*
- * PODCAST PAGE: Velvet Frequency Design System
- * All Access with Clarissa Cardenas — episode showcase
+ * PODCAST PAGE: Editorial Noir Design
+ * All Access with Clarissa Cardenas — episode listings, clean editorial layout
  */
 
 import { motion } from "framer-motion";
-import { Play, ExternalLink, Clock, Calendar } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 
 const PODCAST_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/podcast-studio-mXJ9r7KtGHA5N5Cboki4Fi.webp";
-const VINYL_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/editorial-music-ZPEoSqP8hqRSYCZKdRRn9C.webp";
-const VENUE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/venue-interior-ATXFmubS8U7nye2txhgMWE.webp";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+const fade = {
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7 },
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
   }),
 };
 
 const episodes = [
   {
+    number: "EP 12",
     title: "All Access with Boys Noize",
-    subtitle: "Presented by SPIN",
-    date: "March 2026",
+    guest: "Boys Noize (Alex Ridha)",
     duration: "58 min",
-    description:
-      "Alex Ridha, the Berlin-based producer who performs as Boys Noize, has had an unusually varied year. He's been opening for Nine Inch Nails on the Peel It Back tour, co-produced the Grammy-winning TRON: Ares soundtrack alongside Trent Reznor and Atticus Ross, and still manages to find time for the underground techno shows that built his reputation. Recorded at Waterloo Records in Austin.",
-    image: PODCAST_IMG,
+    date: "March 2026",
+    description: "Grammy-winning producer on TRON: Ares, Nine Inch Noize at Coachella 2025, and exclusive crate digging at Waterloo Records in Austin.",
     featured: true,
-    listenUrl: "https://open.spotify.com/show/theconcertqueen",
   },
   {
-    title: "Adam Beyer: The Drumcode Legacy",
-    subtitle: "Seismic Dance Event Preview",
-    date: "February 2026",
+    number: "EP 11",
+    title: "All Access with Adam Beyer",
+    guest: "Adam Beyer",
     duration: "45 min",
-    description:
-      "The Swedish techno titan discusses 25 years of Drumcode Records, his Austin debut at Seismic Dance Event 8.0, and the future of warehouse raves in an era of festival dominance.",
-    image: VINYL_IMG,
+    date: "February 2026",
+    description: "The Drumcode founder on building a techno empire, the evolution of warehouse culture, and his vision for the next decade.",
     featured: false,
-    listenUrl: "https://open.spotify.com/show/theconcertqueen",
   },
   {
-    title: "Simon Doty: Progressive Frequencies",
-    subtitle: "Anjunadeep Spotlight",
-    date: "January 2026",
+    number: "EP 10",
+    title: "All Access with Simon Doty",
+    guest: "Simon Doty",
     duration: "42 min",
-    description:
-      "The Canadian producer and Anjunadeep favorite opens up about his creative process, the emotional depth of progressive house, and why Austin's electronic scene is having a moment.",
-    image: VENUE_IMG,
+    date: "January 2026",
+    description: "The progressive house rising star on Anjunadeep, studio process, and why Austin is becoming an electronic music hub.",
     featured: false,
-    listenUrl: "https://open.spotify.com/show/theconcertqueen",
+  },
+  {
+    number: "EP 09",
+    title: "All Access with Khruangbin",
+    guest: "Khruangbin",
+    duration: "52 min",
+    date: "December 2025",
+    description: "The Houston trio on their genre-defying sound, global influences, and the magic of live performance.",
+    featured: false,
+  },
+  {
+    number: "EP 08",
+    title: "All Access with Floating Points",
+    guest: "Floating Points (Sam Shepherd)",
+    duration: "48 min",
+    date: "November 2025",
+    description: "The neuroscientist-turned-producer on Promises with Pharoah Sanders, the beauty of long-form composition, and DJ culture.",
+    featured: false,
+  },
+  {
+    number: "EP 07",
+    title: "All Access with Peggy Gou",
+    guest: "Peggy Gou",
+    duration: "40 min",
+    date: "October 2025",
+    description: "The Korean-born, Berlin-based DJ on breaking barriers, her fashion line, and the global dance music community.",
+    featured: false,
   },
 ];
 
 export default function Podcast() {
-  const featuredEp = episodes.find((e) => e.featured);
-  const otherEps = episodes.filter((e) => !e.featured);
-
   return (
     <div>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <img src={PODCAST_IMG} alt="Podcast studio" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-burgundy-dark/85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/50 to-noir/20" />
         </div>
-        <div className="relative container">
-          <div className="max-w-3xl">
-            <motion.span
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={0}
-              className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-3 block"
+        <div className="relative container pb-12 md:pb-20 pt-32">
+          <motion.div initial="hidden" animate="visible" className="max-w-2xl">
+            <motion.p variants={fade} custom={0}
+              className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-4"
             >
               The Podcast
-            </motion.span>
-            <motion.h1
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={1}
-              className="font-display text-5xl md:text-7xl font-bold text-cream leading-tight mb-6"
+            </motion.p>
+            <motion.h1 variants={fade} custom={1}
+              className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-4"
             >
               All Access with
               <br />
               <span className="italic text-gold">Clarissa Cardenas</span>
             </motion.h1>
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={2}
-              className="font-body text-lg text-cream/70 max-w-xl leading-relaxed mb-8"
+            <motion.p variants={fade} custom={2}
+              className="font-body text-base text-white/50 max-w-md leading-relaxed mb-3"
             >
-              Intimate conversations with breakthrough and legacy artists who've set themselves apart from the rest. Go beyond the music and into the untold stories that shaped your favorite artists into timeless trailblazers.
+              Intimate conversations with breakthrough and legacy artists. Go beyond the music into the untold stories that shaped your favorite trailblazers.
             </motion.p>
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={3}
-              className="flex flex-wrap gap-4"
+            <motion.p variants={fade} custom={2.5}
+              className="font-body text-sm text-white/30 mb-8"
             >
+              Presented by SPIN Magazine
+            </motion.p>
+            <motion.div variants={fade} custom={3} className="flex flex-col sm:flex-row gap-3">
               <a
                 href="https://open.spotify.com/show/theconcertqueen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-gold text-burgundy-dark font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300"
+                className="btn-primary"
               >
-                <Play size={16} />
                 Listen on Spotify
               </a>
               <a
-                href="https://podcasts.apple.com"
+                href="https://podcasts.apple.com/us/podcast/all-access-with-clarissa-cardenas"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-cream/30 text-cream font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-cream/10 transition-all duration-300"
+                className="btn-secondary"
               >
                 Apple Podcasts
               </a>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Featured Episode */}
-      {featuredEp && (
-        <section className="py-20 md:py-28 bg-cream">
-          <div className="container">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={fadeUp}
-              custom={0}
-              className="mb-10"
-            >
-              <span className="font-body text-xs tracking-[0.3em] uppercase text-gold-dark mb-2 block">
-                Featured Episode
-              </span>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={fadeUp}
-              custom={1}
-              className="group grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-sm overflow-hidden border border-border hover:shadow-xl transition-all duration-500"
-            >
-              <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
-                <img
-                  src={featuredEp.image}
-                  alt={featuredEp.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-dark/50 to-transparent" />
-                <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center shadow-lg">
-                    <Play size={20} className="text-burgundy-dark ml-0.5" />
-                  </div>
-                  <span className="font-body text-sm text-cream font-medium">{featuredEp.duration}</span>
-                </div>
-              </div>
-
-              <div className="p-8 lg:p-10 flex flex-col justify-center">
-                <span className="font-body text-xs tracking-[0.2em] uppercase text-gold-dark mb-2">
-                  {featuredEp.subtitle}
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal mb-4">
-                  {featuredEp.title}
-                </h2>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="flex items-center gap-1.5 font-body text-sm text-charcoal-light">
-                    <Calendar size={14} />
-                    {featuredEp.date}
-                  </span>
-                  <span className="flex items-center gap-1.5 font-body text-sm text-charcoal-light">
-                    <Clock size={14} />
-                    {featuredEp.duration}
-                  </span>
-                </div>
-                <p className="font-body text-base text-charcoal-light leading-relaxed mb-6">
-                  {featuredEp.description}
-                </p>
-                <a
-                  href={featuredEp.listenUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-burgundy-dark text-cream font-body font-semibold text-sm rounded-sm hover:bg-burgundy transition-all duration-300 self-start"
-                >
-                  <Play size={16} />
-                  Listen Now
-                  <ExternalLink size={14} />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* All Episodes */}
-      <section className="py-20 md:py-28 bg-white">
+      {/* ===== EPISODES ===== */}
+      <section className="py-16 md:py-24 bg-white">
         <div className="container">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            custom={0}
-            className="font-display text-3xl md:text-4xl font-bold text-burgundy-dark mb-10"
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={fade} custom={0}
+            className="mb-10 md:mb-14"
           >
-            All Episodes
-          </motion.h2>
+            <p className="font-body text-[11px] tracking-[0.2em] uppercase text-deep-red mb-3">
+              Episodes
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-noir">
+              Recent Episodes
+            </h2>
+          </motion.div>
 
-          <div className="space-y-6">
-            {otherEps.map((ep, i) => (
-              <motion.a
+          <div className="space-y-0">
+            {episodes.map((ep, i) => (
+              <motion.div
                 key={ep.title}
-                href={ep.listenUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={i}
-                className="group flex flex-col md:flex-row gap-6 p-5 bg-cream rounded-sm border border-border hover:border-gold/30 hover:shadow-lg transition-all duration-500"
+                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-30px" }}
+                variants={fade} custom={i * 0.2}
+                className={`group py-6 md:py-8 border-b border-noir/8 ${
+                  ep.featured ? "bg-cream/50 -mx-4 px-4 md:-mx-6 md:px-6 border-t border-noir/8" : ""
+                }`}
               >
-                <div className="relative w-full md:w-48 aspect-[16/9] md:aspect-square flex-shrink-0 overflow-hidden rounded-sm">
-                  <img
-                    src={ep.image}
-                    alt={ep.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-burgundy-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
-                      <Play size={16} className="text-burgundy-dark ml-0.5" />
-                    </div>
+                <div className="flex items-start gap-5 md:gap-8">
+                  {/* Play icon */}
+                  <div className="shrink-0 w-12 h-12 md:w-14 md:h-14 bg-noir flex items-center justify-center group-hover:bg-deep-red transition-colors duration-300 mt-1">
+                    <Play size={18} className="text-gold group-hover:text-white transition-colors duration-300 ml-0.5" />
                   </div>
-                </div>
 
-                <div className="flex-1">
-                  <span className="font-body text-xs tracking-[0.2em] uppercase text-gold-dark">
-                    {ep.subtitle}
-                  </span>
-                  <h3 className="font-display text-xl font-semibold text-charcoal group-hover:text-burgundy transition-colors duration-300 mt-1 mb-2">
-                    {ep.title}
-                  </h3>
-                  <div className="flex items-center gap-4 mb-3">
-                    <span className="flex items-center gap-1.5 font-body text-sm text-charcoal-light">
-                      <Calendar size={12} />
-                      {ep.date}
-                    </span>
-                    <span className="flex items-center gap-1.5 font-body text-sm text-charcoal-light">
-                      <Clock size={12} />
-                      {ep.duration}
-                    </span>
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="font-body text-[11px] tracking-[0.12em] uppercase text-gold-dark font-semibold">
+                        {ep.number}
+                      </span>
+                      {ep.featured && (
+                        <span className="font-body text-[10px] tracking-[0.1em] uppercase text-deep-red font-semibold bg-deep-red/10 px-2 py-0.5">
+                          Latest
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-noir group-hover:text-deep-red transition-colors duration-300 mb-1">
+                      {ep.title}
+                    </h3>
+                    <p className="font-body text-sm text-noir/40 mb-3">
+                      {ep.duration} · {ep.date}
+                    </p>
+                    <p className="font-body text-sm text-noir/50 leading-relaxed max-w-2xl">
+                      {ep.description}
+                    </p>
                   </div>
-                  <p className="font-body text-sm text-charcoal-light leading-relaxed line-clamp-2">
-                    {ep.description}
-                  </p>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About the Show */}
-      <section className="py-20 md:py-24 bg-burgundy-dark">
+      {/* ===== ABOUT THE SHOW ===== */}
+      <section className="py-16 md:py-24 bg-noir text-white">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-2xl">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             >
-              <motion.h2
-                variants={fadeUp}
-                custom={0}
-                className="font-display text-3xl md:text-4xl font-bold text-cream mb-6"
+              <motion.p variants={fade} custom={0}
+                className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-4"
               >
                 About the Show
-              </motion.h2>
-              <motion.p
-                variants={fadeUp}
-                custom={1}
-                className="font-accent text-xl italic text-cream/70 leading-relaxed mb-8"
-              >
-                If you're a true music fan who craves authentic storytelling over surface-level interviews, this is your backstage pass. Each episode features exclusive vinyl crate segments where artists reveal the records that shaped their sound, plus behind-the-scenes insights into their creative process.
               </motion.p>
-              <motion.div variants={fadeUp} custom={2} className="flex flex-wrap justify-center gap-4">
+              <motion.h2 variants={fade} custom={1}
+                className="font-display text-3xl md:text-4xl font-bold text-white mb-5"
+              >
+                Beyond the Music
+              </motion.h2>
+              <motion.p variants={fade} custom={2}
+                className="font-body text-base text-white/50 leading-relaxed mb-5"
+              >
+                If you're a true music fan who craves authentic storytelling over surface-level interviews, this is your backstage pass. Each episode explores the artistic vision, personal influences, and cultural impact behind the music you love.
+              </motion.p>
+              <motion.p variants={fade} custom={3}
+                className="font-body text-base text-white/50 leading-relaxed mb-8"
+              >
+                Featuring exclusive vinyl crate segments where artists reveal the records that shaped their sound, plus behind-the-scenes insights into their creative process.
+              </motion.p>
+              <motion.div variants={fade} custom={4}>
                 <a
-                  href="https://open.spotify.com/show/theconcertqueen"
+                  href="https://theconcertqueen.substack.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-burgundy-dark font-body font-semibold text-sm rounded-sm hover:bg-gold-light transition-all duration-300"
+                  className="text-link text-gold hover:text-gold-light"
                 >
-                  Spotify
-                  <ExternalLink size={14} />
-                </a>
-                <a
-                  href="https://podcasts.apple.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-cream/30 text-cream font-body font-semibold text-sm rounded-sm hover:bg-cream/10 transition-all duration-300"
-                >
-                  Apple Podcasts
-                  <ExternalLink size={14} />
-                </a>
-                <a
-                  href="https://www.youtube.com/@theconcertqueen"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-cream/30 text-cream font-body font-semibold text-sm rounded-sm hover:bg-cream/10 transition-all duration-300"
-                >
-                  YouTube
-                  <ExternalLink size={14} />
+                  Subscribe for New Episodes
+                  <ArrowRight size={14} />
                 </a>
               </motion.div>
             </motion.div>

@@ -7,9 +7,9 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Podcast from "./pages/Podcast";
-import VenueGuide from "./pages/VenueGuide";
 import Press from "./pages/Press";
 import Contact from "./pages/Contact";
+import CityPage from "./pages/CityPage";
 import Layout from "./components/Layout";
 
 function Router() {
@@ -19,9 +19,9 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/podcast" component={Podcast} />
-        <Route path="/venues" component={VenueGuide} />
         <Route path="/press" component={Press} />
         <Route path="/contact" component={Contact} />
+        <Route path="/city/:slug" component={CityPage} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>

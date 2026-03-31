@@ -1,214 +1,83 @@
 /*
- * CONTACT PAGE: Velvet Frequency Design System
- * Professional inquiry form for partnerships, press, and general inquiries
+ * CONTACT PAGE: Editorial Noir Design
+ * Minimal, premium inquiry form — fills viewport properly
  */
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Instagram, Music2, MapPin, Send } from "lucide-react";
+import { ArrowRight, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
-const AUSTIN_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/austin-skyline-VaS4wYUu5NeJeLNcGPH3zd.webp";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+const fade = {
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7 },
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
   }),
 };
 
-const contactMethods = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "hello@theconcertqueen.com",
-    href: "mailto:hello@theconcertqueen.com",
-  },
-  {
-    icon: Instagram,
-    label: "Instagram",
-    value: "@theconcertqueen",
-    href: "https://www.instagram.com/theconcertqueen",
-  },
-  {
-    icon: Music2,
-    label: "Spotify",
-    value: "All Access Podcast",
-    href: "https://open.spotify.com/show/theconcertqueen",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Austin, Texas",
-    href: "#",
-  },
+const subjects = [
+  "Brand Partnership",
+  "Press Inquiry",
+  "Podcast Guest Pitch",
+  "Event Coverage",
+  "Coaching / Consulting",
+  "General Inquiry",
 ];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "General Inquiry",
+    subject: "",
     message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you for your message! We'll be in touch soon.");
-    setFormData({ name: "", email: "", subject: "General Inquiry", message: "" });
+    toast.success("Message sent. We'll be in touch soon.");
+    setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={AUSTIN_IMG} alt="Austin skyline" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-burgundy-dark/85" />
-        </div>
-        <div className="relative container">
-          <div className="max-w-3xl">
-            <motion.span
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={0}
-              className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-3 block"
+    <div className="min-h-screen flex flex-col">
+      {/* ===== HERO ===== */}
+      <section className="bg-noir pt-28 md:pt-36 pb-16 md:pb-20">
+        <div className="container">
+          <motion.div initial="hidden" animate="visible" className="max-w-2xl">
+            <motion.p variants={fade} custom={0}
+              className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-4"
             >
-              Get in Touch
-            </motion.span>
-            <motion.h1
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={1}
-              className="font-display text-5xl md:text-7xl font-bold text-cream leading-tight mb-6"
-            >
-              Let's
-              <br />
-              <span className="italic text-gold">Connect</span>
-            </motion.h1>
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={2}
-              className="font-body text-lg text-cream/70 max-w-xl leading-relaxed"
-            >
-              Whether you're interested in brand partnerships, press inquiries, event coverage, or just want to say hello — we'd love to hear from you.
+              Contact
             </motion.p>
-          </div>
+            <motion.h1 variants={fade} custom={1}
+              className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-4"
+            >
+              Let's <span className="italic text-gold">Connect</span>
+            </motion.h1>
+            <motion.p variants={fade} custom={2}
+              className="font-body text-base text-white/50 max-w-md leading-relaxed"
+            >
+              For brand partnerships, press inquiries, podcast pitches, or coaching — we'd love to hear from you.
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact Form & Info */}
-      <section className="py-20 md:py-28 bg-cream">
+      {/* ===== FORM + INFO ===== */}
+      <section className="flex-1 py-16 md:py-24 bg-cream">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-            {/* Contact Info */}
-            <div className="lg:col-span-2">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-              >
-                <motion.h2
-                  variants={fadeUp}
-                  custom={0}
-                  className="font-display text-3xl font-bold text-burgundy-dark mb-6"
-                >
-                  Reach Out
-                </motion.h2>
-                <motion.p
-                  variants={fadeUp}
-                  custom={1}
-                  className="font-body text-base text-charcoal-light leading-relaxed mb-8"
-                >
-                  Concert Queen Media is always open to new partnerships, collaborations, and conversations. Based in Austin, Texas — the Live Music Capital of the World.
-                </motion.p>
-
-                <div className="space-y-5">
-                  {contactMethods.map((method, i) => (
-                    <motion.a
-                      key={method.label}
-                      href={method.href}
-                      target={method.href.startsWith("http") ? "_blank" : undefined}
-                      rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      variants={fadeUp}
-                      custom={i + 2}
-                      className="group flex items-center gap-4"
-                    >
-                      <div className="w-11 h-11 rounded-full bg-burgundy-dark/5 flex items-center justify-center group-hover:bg-burgundy-dark/10 transition-colors duration-300">
-                        <method.icon size={18} className="text-burgundy" />
-                      </div>
-                      <div>
-                        <span className="font-body text-xs text-charcoal-light uppercase tracking-wider block">
-                          {method.label}
-                        </span>
-                        <span className="font-body text-sm text-charcoal font-medium group-hover:text-burgundy transition-colors duration-300">
-                          {method.value}
-                        </span>
-                      </div>
-                    </motion.a>
-                  ))}
-                </div>
-
-                {/* Inquiry Types */}
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  custom={6}
-                  className="mt-10 p-6 bg-white rounded-sm border border-border"
-                >
-                  <h3 className="font-display text-lg font-semibold text-charcoal mb-3">
-                    We Work With
-                  </h3>
-                  <ul className="space-y-2">
-                    {[
-                      "Brand sponsors & advertisers",
-                      "Music festivals & event organizers",
-                      "Venues seeking featured listings",
-                      "Artists & management teams",
-                      "PR agencies & publicists",
-                      "City & institutional partners",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gold mt-2 flex-shrink-0" />
-                        <span className="font-body text-sm text-charcoal-light">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </motion.div>
-            </div>
-
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
             {/* Form */}
-            <div className="lg:col-span-3">
-              <motion.form
-                onSubmit={handleSubmit}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="bg-white rounded-sm border border-border p-8 md:p-10"
-              >
-                <motion.h3
-                  variants={fadeUp}
-                  custom={0}
-                  className="font-display text-2xl font-bold text-charcoal mb-6"
-                >
-                  Send a Message
-                </motion.h3>
-
-                <div className="space-y-5">
-                  <motion.div variants={fadeUp} custom={1}>
-                    <label className="font-body text-sm text-charcoal font-medium block mb-1.5">
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+              className="lg:col-span-7"
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <motion.div variants={fade} custom={0} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="font-body text-[11px] tracking-[0.12em] uppercase text-noir/50 mb-2 block">
                       Name
                     </label>
                     <input
@@ -216,13 +85,12 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-border rounded-sm font-body text-sm text-charcoal placeholder:text-charcoal-light/50 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/20 transition-all"
+                      className="w-full bg-white border border-noir/10 px-4 py-3.5 font-body text-sm text-noir placeholder:text-noir/25 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all duration-300"
                       placeholder="Your name"
                     />
-                  </motion.div>
-
-                  <motion.div variants={fadeUp} custom={2}>
-                    <label className="font-body text-sm text-charcoal font-medium block mb-1.5">
+                  </div>
+                  <div>
+                    <label className="font-body text-[11px] tracking-[0.12em] uppercase text-noir/50 mb-2 block">
                       Email
                     </label>
                     <input
@@ -230,55 +98,113 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-border rounded-sm font-body text-sm text-charcoal placeholder:text-charcoal-light/50 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/20 transition-all"
+                      className="w-full bg-white border border-noir/10 px-4 py-3.5 font-body text-sm text-noir placeholder:text-noir/25 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all duration-300"
                       placeholder="your@email.com"
                     />
-                  </motion.div>
+                  </div>
+                </motion.div>
 
-                  <motion.div variants={fadeUp} custom={3}>
-                    <label className="font-body text-sm text-charcoal font-medium block mb-1.5">
-                      Subject
-                    </label>
-                    <select
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-border rounded-sm font-body text-sm text-charcoal focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/20 transition-all"
-                    >
-                      <option value="General Inquiry">General Inquiry</option>
-                      <option value="Brand Partnership">Brand Partnership</option>
-                      <option value="Press Inquiry">Press Inquiry</option>
-                      <option value="Featured Venue Listing">Featured Venue Listing</option>
-                      <option value="Event Coverage">Event Coverage</option>
-                      <option value="Life Coaching">Life Coaching</option>
-                    </select>
-                  </motion.div>
+                <motion.div variants={fade} custom={1}>
+                  <label className="font-body text-[11px] tracking-[0.12em] uppercase text-noir/50 mb-2 block">
+                    Subject
+                  </label>
+                  <select
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full bg-white border border-noir/10 px-4 py-3.5 font-body text-sm text-noir focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all duration-300 appearance-none"
+                  >
+                    <option value="">Select a subject</option>
+                    {subjects.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </motion.div>
 
-                  <motion.div variants={fadeUp} custom={4}>
-                    <label className="font-body text-sm text-charcoal font-medium block mb-1.5">
-                      Message
-                    </label>
-                    <textarea
-                      required
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-border rounded-sm font-body text-sm text-charcoal placeholder:text-charcoal-light/50 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/20 transition-all resize-none"
-                      placeholder="Tell us about your project or inquiry..."
-                    />
-                  </motion.div>
+                <motion.div variants={fade} custom={2}>
+                  <label className="font-body text-[11px] tracking-[0.12em] uppercase text-noir/50 mb-2 block">
+                    Message
+                  </label>
+                  <textarea
+                    required
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-white border border-noir/10 px-4 py-3.5 font-body text-sm text-noir placeholder:text-noir/25 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all duration-300 resize-none"
+                    placeholder="Tell us about your project or inquiry..."
+                  />
+                </motion.div>
 
-                  <motion.div variants={fadeUp} custom={5}>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 bg-burgundy-dark text-cream font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-burgundy transition-all duration-300 w-full justify-center md:w-auto"
-                    >
-                      <Send size={16} />
-                      Send Message
-                    </button>
-                  </motion.div>
+                <motion.div variants={fade} custom={3}>
+                  <button type="submit" className="btn-primary w-full sm:w-auto">
+                    Send Message
+                    <ArrowRight size={15} />
+                  </button>
+                </motion.div>
+              </form>
+            </motion.div>
+
+            {/* Info */}
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+              className="lg:col-span-5"
+            >
+              <motion.div variants={fade} custom={0} className="mb-10">
+                <h3 className="font-display text-xl font-semibold text-noir mb-4">
+                  Get in Touch
+                </h3>
+                <div className="space-y-4">
+                  <a
+                    href="mailto:hello@theconcertqueen.com"
+                    className="flex items-center gap-3 font-body text-sm text-noir/60 hover:text-gold-dark transition-colors duration-300"
+                  >
+                    <Mail size={16} className="text-gold shrink-0" />
+                    hello@theconcertqueen.com
+                  </a>
+                  <div className="flex items-center gap-3 font-body text-sm text-noir/60">
+                    <MapPin size={16} className="text-gold shrink-0" />
+                    Austin, Texas
+                  </div>
                 </div>
-              </motion.form>
-            </div>
+              </motion.div>
+
+              <motion.div variants={fade} custom={1} className="mb-10">
+                <h3 className="font-display text-xl font-semibold text-noir mb-4">
+                  Follow Along
+                </h3>
+                <div className="flex gap-5">
+                  {[
+                    { label: "Instagram", url: "https://www.instagram.com/theconcertqueen" },
+                    { label: "Spotify", url: "https://open.spotify.com/show/theconcertqueen" },
+                    { label: "TikTok", url: "https://www.tiktok.com/@theconcertqueen" },
+                  ].map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-xs tracking-[0.1em] uppercase text-noir/40 hover:text-gold-dark transition-colors duration-300"
+                    >
+                      {social.label}
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div variants={fade} custom={2}>
+                <div className="bg-noir p-6 md:p-8">
+                  <h3 className="font-display text-lg font-semibold text-white mb-3">
+                    Partnership Inquiries
+                  </h3>
+                  <p className="font-body text-sm text-white/45 leading-relaxed mb-4">
+                    We work with brands that share our passion for authentic music culture. Sponsorships, content series, event activations, and custom packages available.
+                  </p>
+                  <p className="font-body text-xs text-gold">
+                    Typical response time: 24–48 hours
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>

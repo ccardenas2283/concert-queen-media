@@ -1,197 +1,178 @@
 /*
- * HOME PAGE: Velvet Frequency Design System
- * - Cinematic hero with parallax concert photo
- * - Event discovery focus with Ticketmaster affiliate CTA
- * - Featured podcast episodes
- * - Brand partner showcase
- * - Newsletter signup
+ * HOME PAGE: Editorial Noir Design
+ * Sections: Hero → City Selector → Events → Podcast → Venue Guide → Founder → Partners → Email Capture
+ * Copy: concise, confident, editorial. Authority + exclusivity + insider access.
  */
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Play, MapPin, Calendar, Mic2, Star, ExternalLink } from "lucide-react";
+import { ArrowRight, Play, MapPin, Calendar, ChevronRight } from "lucide-react";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/hero-concert-7Mabueq7uJitiCXb6NmUGd.webp";
-const AUSTIN_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/austin-skyline-VaS4wYUu5NeJeLNcGPH3zd.webp";
 const PODCAST_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/podcast-studio-mXJ9r7KtGHA5N5Cboki4Fi.webp";
 const VENUE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/venue-interior-ATXFmubS8U7nye2txhgMWE.webp";
-const VINYL_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/editorial-music-ZPEoSqP8hqRSYCZKdRRn9C.webp";
+const AUSTIN_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/austin-skyline-VaS4wYUu5NeJeLNcGPH3zd.webp";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+const fade = {
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7 },
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
   }),
 };
 
-const upcomingEvents = [
-  {
-    date: "APR 12",
-    artist: "Seismic Dance Event 8.0",
-    venue: "The Concourse Project",
-    genre: "Electronic / Techno",
-    ticketUrl: "https://www.ticketmaster.com",
-  },
-  {
-    date: "APR 18",
-    artist: "Adam Beyer",
-    venue: "Kingdom Austin",
-    genre: "Techno",
-    ticketUrl: "https://www.ticketmaster.com",
-  },
-  {
-    date: "MAY 03",
-    artist: "Simon Doty",
-    venue: "The Venue ATX",
-    genre: "Progressive House",
-    ticketUrl: "https://www.ticketmaster.com",
-  },
-  {
-    date: "MAY 15",
-    artist: "Boys Noize",
-    venue: "Empire Control Room",
-    genre: "Electronic",
-    ticketUrl: "https://www.ticketmaster.com",
-  },
+const cities = [
+  { slug: "austin", name: "Austin", tagline: "Live Music Capital of the World", active: true },
+  { slug: "miami", name: "Miami", tagline: "Coming 2026", active: false },
+  { slug: "los-angeles", name: "Los Angeles", tagline: "Coming 2026", active: false },
+  { slug: "new-york", name: "New York", tagline: "Coming 2027", active: false },
 ];
 
-const podcastEpisodes = [
-  {
-    title: "All Access with Boys Noize",
-    subtitle: "Presented by SPIN",
-    description: "Grammy-winning TRON: Ares soundtrack, Nine Inch Noize at Coachella, and exclusive crate digging at Waterloo Records.",
-    image: PODCAST_IMG,
-  },
-  {
-    title: "Adam Beyer: The Drumcode Legacy",
-    subtitle: "Seismic Dance Event Preview",
-    description: "The Swedish techno titan discusses 25 years of Drumcode, his Austin debut, and the future of warehouse raves.",
-    image: VINYL_IMG,
-  },
+const events = [
+  { date: "APR 12", title: "Seismic Dance Event 8.0", venue: "The Concourse Project", genre: "Electronic" },
+  { date: "APR 18", title: "Adam Beyer", venue: "Kingdom Austin", genre: "Techno" },
+  { date: "MAY 03", title: "Simon Doty", venue: "The Venue ATX", genre: "Progressive House" },
+  { date: "MAY 15", title: "Boys Noize", venue: "Empire Control Room", genre: "Electronic" },
 ];
 
-const partners = [
-  "SPIN Magazine",
-  "Live Nation",
-  "HBO",
-  "Capital One",
-  "Verizon",
-  "Honda",
-  "Red Bull Music",
-];
+const partners = ["SPIN", "Live Nation", "HBO", "Capital One", "Verizon", "Honda", "Red Bull"];
 
 export default function Home() {
   return (
     <div>
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-screen flex items-end overflow-hidden">
-        {/* Background Image */}
+      {/* ===== HERO ===== */}
+      <section className="relative h-screen max-h-[900px] min-h-[600px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src={HERO_IMG}
-            alt="Live concert"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-burgundy-dark via-burgundy-dark/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-burgundy-dark/40 to-transparent" />
+          <img src={HERO_IMG} alt="Live concert" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/50 to-noir/20" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative container pb-20 md:pb-28 pt-32">
-          <div className="max-w-3xl">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={0}
+        <div className="relative container pb-16 md:pb-24 pt-32">
+          <div className="max-w-2xl">
+            <motion.p
+              initial="hidden" animate="visible" variants={fade} custom={0}
+              className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-5"
             >
-              <span className="inline-block font-body text-xs tracking-[0.3em] uppercase text-gold mb-4">
-                Austin's Premier Music Media Brand
-              </span>
-            </motion.div>
+              Concert Queen Media
+            </motion.p>
 
             <motion.h1
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={1}
-              className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-cream leading-[0.95] mb-6"
+              initial="hidden" animate="visible" variants={fade} custom={1}
+              className="font-display text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white leading-[0.95] mb-6"
             >
               Your Backstage
               <br />
-              <span className="italic text-gold">Pass to Austin</span>
+              <span className="italic text-gold">Pass to Live Music</span>
             </motion.h1>
 
             <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={2}
-              className="font-body text-lg md:text-xl text-cream/80 max-w-xl mb-8 leading-relaxed"
+              initial="hidden" animate="visible" variants={fade} custom={2}
+              className="font-body text-base md:text-lg text-white/60 max-w-md mb-10 leading-relaxed"
             >
-              Live music discovery, exclusive artist interviews, and the definitive venue guide for the Live Music Capital of the World.
+              Curated events. Exclusive interviews. Insider access to the world's best music cities.
             </motion.p>
 
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={3}
-              className="flex flex-wrap gap-4"
+              initial="hidden" animate="visible" variants={fade} custom={3}
+              className="flex flex-col sm:flex-row gap-3"
             >
-              <Link
-                href="/venues"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-gold text-burgundy-dark font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300 hover:shadow-lg hover:shadow-gold/20"
-              >
-                <MapPin size={16} />
-                Explore Venues
+              <Link href="/city/austin" className="btn-primary">
+                <MapPin size={15} />
+                Explore Austin
               </Link>
-              <Link
-                href="/podcast"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-cream/30 text-cream font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-cream/10 transition-all duration-300"
-              >
-                <Play size={16} />
+              <Link href="/podcast" className="btn-secondary">
+                <Play size={15} />
                 Listen Now
               </Link>
             </motion.div>
           </div>
+        </div>
 
-          {/* Scroll indicator */}
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ delay: 1.8, duration: 1 }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block"
+        >
+          <div className="w-[1px] h-12 bg-gradient-to-b from-gold/60 to-transparent" />
+        </motion.div>
+      </section>
+
+      {/* ===== CITY SELECTOR ===== */}
+      <section className="py-16 md:py-24 bg-cream">
+        <div className="container">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={fade} custom={0}
+            className="text-center mb-12 md:mb-16"
           >
-            <div className="w-5 h-8 border-2 border-cream/30 rounded-full flex items-start justify-center p-1">
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-1 h-1.5 bg-gold rounded-full"
-              />
-            </div>
+            <p className="font-body text-[11px] tracking-[0.2em] uppercase text-gold-dark mb-3">
+              Select Your City
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-noir">
+              Where Are You Going?
+            </h2>
           </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {cities.map((city, i) => (
+              <motion.div
+                key={city.slug}
+                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }}
+                variants={fade} custom={i * 0.5}
+              >
+                <Link
+                  href={`/city/${city.slug}`}
+                  className={`group block relative overflow-hidden transition-all duration-500 ${
+                    city.active
+                      ? "bg-noir text-white hover:shadow-2xl hover:shadow-noir/20"
+                      : "bg-white text-noir border border-noir/8 hover:border-noir/20"
+                  } p-6 md:p-8`}
+                >
+                  <div className="flex items-start justify-between mb-8">
+                    <MapPin
+                      size={20}
+                      className={city.active ? "text-gold" : "text-noir/20"}
+                    />
+                    <ChevronRight
+                      size={16}
+                      className={`transition-transform duration-300 group-hover:translate-x-1 ${
+                        city.active ? "text-gold" : "text-noir/30"
+                      }`}
+                    />
+                  </div>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-1">
+                    {city.name}
+                  </h3>
+                  <p className={`font-body text-xs tracking-wide ${
+                    city.active ? "text-gold/80" : "text-noir/40"
+                  }`}>
+                    {city.tagline}
+                  </p>
+                  {city.active && (
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold" />
+                  )}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===== UPCOMING EVENTS ===== */}
-      <section className="py-20 md:py-28 bg-cream">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container">
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            custom={0}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12"
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={fade} custom={0}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14"
           >
             <div>
-              <span className="font-body text-xs tracking-[0.3em] uppercase text-gold-dark mb-2 block">
-                What's Coming Up
-              </span>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-burgundy-dark">
+              <p className="font-body text-[11px] tracking-[0.2em] uppercase text-deep-red mb-3">
+                Austin
+              </p>
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-noir">
                 Upcoming Events
               </h2>
             </div>
@@ -199,294 +180,252 @@ export default function Home() {
               href="https://www.ticketmaster.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-body text-sm font-semibold text-burgundy hover:text-gold-dark transition-colors duration-300"
+              className="text-link text-noir/50 hover:text-gold-dark"
             >
-              View All on Ticketmaster
-              <ArrowRight size={16} />
+              View All
+              <ArrowRight size={14} />
             </a>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {upcomingEvents.map((event, i) => (
+          <div className="space-y-0">
+            {events.map((event, i) => (
               <motion.a
-                key={event.artist}
-                href={event.ticketUrl}
+                key={event.title}
+                href="https://www.ticketmaster.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={i}
-                className="group flex gap-5 p-5 bg-white rounded-sm border border-border hover:border-gold/40 hover:shadow-lg hover:shadow-gold/5 transition-all duration-500"
+                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-30px" }}
+                variants={fade} custom={i * 0.3}
+                className="group flex items-center gap-5 md:gap-8 py-5 md:py-6 border-b border-noir/8 hover:bg-cream/50 transition-all duration-300 -mx-4 px-4 md:-mx-6 md:px-6"
               >
-                {/* Date Block */}
-                <div className="flex-shrink-0 w-16 h-16 bg-burgundy-dark rounded-sm flex flex-col items-center justify-center">
-                  <span className="font-display text-xs text-gold uppercase tracking-wider">
-                    {event.date.split(" ")[0]}
-                  </span>
-                  <span className="font-display text-xl font-bold text-cream leading-none">
+                {/* Date */}
+                <div className="shrink-0 w-14 md:w-16 text-center">
+                  <span className="font-display text-2xl md:text-3xl font-bold text-noir leading-none block">
                     {event.date.split(" ")[1]}
                   </span>
-                </div>
-
-                {/* Event Info */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-display text-lg font-semibold text-charcoal group-hover:text-burgundy transition-colors duration-300 truncate">
-                    {event.artist}
-                  </h3>
-                  <div className="flex items-center gap-3 mt-1">
-                    <span className="font-body text-sm text-charcoal-light flex items-center gap-1">
-                      <MapPin size={12} />
-                      {event.venue}
-                    </span>
-                    <span className="font-body text-xs text-charcoal-light/60 px-2 py-0.5 bg-cream-dark rounded-sm">
-                      {event.genre}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Ticket CTA */}
-                <div className="flex-shrink-0 self-center">
-                  <span className="inline-flex items-center gap-1 px-4 py-2 bg-gold/10 text-gold-dark font-body text-xs font-semibold rounded-sm group-hover:bg-gold group-hover:text-burgundy-dark transition-all duration-300">
-                    Get Tickets
-                    <ExternalLink size={12} />
+                  <span className="font-body text-[10px] tracking-[0.15em] uppercase text-noir/40">
+                    {event.date.split(" ")[0]}
                   </span>
                 </div>
+
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-display text-lg md:text-xl font-semibold text-noir group-hover:text-deep-red transition-colors duration-300 truncate">
+                    {event.title}
+                  </h3>
+                  <p className="font-body text-sm text-noir/40 mt-0.5 flex items-center gap-2">
+                    <MapPin size={12} />
+                    {event.venue}
+                    <span className="hidden sm:inline text-noir/20">·</span>
+                    <span className="hidden sm:inline">{event.genre}</span>
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="shrink-0 hidden sm:block">
+                  <span className="btn-primary text-xs py-2.5 px-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Tickets
+                  </span>
+                </div>
+                <ChevronRight size={18} className="shrink-0 text-noir/20 group-hover:text-gold transition-colors duration-300 sm:hidden" />
               </motion.a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== VENUE GUIDE TEASER ===== */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* ===== FEATURED PODCAST ===== */}
+      <section className="py-16 md:py-24 bg-noir text-white">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            >
+              <motion.p variants={fade} custom={0}
+                className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-4"
+              >
+                The Podcast
+              </motion.p>
+              <motion.h2 variants={fade} custom={1}
+                className="font-display text-3xl md:text-5xl font-bold text-white leading-tight mb-5"
+              >
+                All Access with
+                <br />
+                <span className="italic text-gold">Clarissa Cardenas</span>
+              </motion.h2>
+              <motion.p variants={fade} custom={2}
+                className="font-body text-base text-white/50 mb-4 leading-relaxed max-w-md"
+              >
+                Intimate conversations with breakthrough and legacy artists. Go beyond the music into the untold stories that shaped your favorite trailblazers.
+              </motion.p>
+              <motion.p variants={fade} custom={2.5}
+                className="font-body text-sm text-white/30 mb-8"
+              >
+                Presented by SPIN Magazine
+              </motion.p>
+              <motion.div variants={fade} custom={3} className="flex flex-col sm:flex-row gap-3">
+                <Link href="/podcast" className="btn-primary">
+                  <Play size={15} />
+                  Latest Episode
+                </Link>
+                <a
+                  href="https://open.spotify.com/show/theconcertqueen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                >
+                  Spotify
+                </a>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+              variants={fade} custom={2}
+              className="relative"
+            >
+              <div className="relative overflow-hidden aspect-[4/3]">
+                <img
+                  src={PODCAST_IMG}
+                  alt="All Access Podcast Studio"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-noir/40 to-transparent" />
+              </div>
+              {/* Featured episode card */}
+              <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 bg-noir/90 backdrop-blur-sm border border-white/10 p-4 md:p-5">
+                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-gold mb-1.5">
+                  Latest Episode
+                </p>
+                <h4 className="font-display text-lg font-semibold text-white mb-1">
+                  All Access with Boys Noize
+                </h4>
+                <p className="font-body text-xs text-white/40">
+                  58 min · March 2026
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== VENUE GUIDE ===== */}
+      <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src={VENUE_IMG}
-            alt="Austin venue"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-burgundy-dark/80" />
+          <img src={VENUE_IMG} alt="Austin venue" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-noir/85" />
         </div>
 
         <div className="relative container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-xl">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             >
-              <motion.span
-                variants={fadeUp}
-                custom={0}
-                className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-3 block"
+              <motion.p variants={fade} custom={0}
+                className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-4"
               >
-                Concert Queen Venue Guide
-              </motion.span>
-              <motion.h2
-                variants={fadeUp}
-                custom={1}
-                className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-cream leading-tight mb-6"
-              >
-                Discover Austin's
-                <br />
-                <span className="italic text-gold">Best Stages</span>
-              </motion.h2>
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="font-body text-lg text-cream/70 mb-8 max-w-lg leading-relaxed"
-              >
-                The definitive digital venue guide covering all 10 Austin council districts. From legendary honky-tonks to cutting-edge electronic warehouses — find your next unforgettable night out.
+                The Venue Guide
               </motion.p>
-              <motion.div variants={fadeUp} custom={3}>
-                <Link
-                  href="/venues"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-gold text-burgundy-dark font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300"
-                >
-                  <MapPin size={16} />
-                  Explore the Guide
-                  <ArrowRight size={16} />
+              <motion.h2 variants={fade} custom={1}
+                className="font-display text-3xl md:text-5xl font-bold text-white leading-tight mb-5"
+              >
+                Every Stage.
+                <br />
+                Every District.
+              </motion.h2>
+              <motion.p variants={fade} custom={2}
+                className="font-body text-base text-white/50 mb-8 leading-relaxed"
+              >
+                The definitive digital venue guide covering all 10 Austin council districts. From legendary honky-tonks to cutting-edge electronic warehouses.
+              </motion.p>
+              <motion.div variants={fade} custom={3}>
+                <Link href="/city/austin" className="btn-primary">
+                  <MapPin size={15} />
+                  Explore Venues
                 </Link>
               </motion.div>
             </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={fadeUp}
-              custom={2}
-              className="hidden lg:grid grid-cols-2 gap-4"
-            >
-              {[
-                { icon: MapPin, label: "250+ Venues", desc: "Across all 10 districts" },
-                { icon: Calendar, label: "Live Events", desc: "Updated daily" },
-                { icon: Star, label: "Curated Picks", desc: "Editor's selections" },
-                { icon: Mic2, label: "Artist Spotlights", desc: "Local & touring" },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  variants={fadeUp}
-                  custom={i + 2}
-                  className="glass-dark rounded-sm p-5 border border-cream/10"
-                >
-                  <item.icon size={24} className="text-gold mb-3" />
-                  <h4 className="font-display text-lg font-semibold text-cream mb-1">
-                    {item.label}
-                  </h4>
-                  <p className="font-body text-sm text-cream/50">{item.desc}</p>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
-        </div>
-      </section>
 
-      {/* ===== PODCAST SECTION ===== */}
-      <section className="py-20 md:py-28 bg-cream">
-        <div className="container">
+          {/* Stats */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            custom={0}
-            className="text-center mb-14"
+            initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="grid grid-cols-3 gap-6 mt-16 md:mt-20 max-w-lg"
           >
-            <span className="font-body text-xs tracking-[0.3em] uppercase text-gold-dark mb-2 block">
-              All Access with Clarissa Cardenas
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-burgundy-dark mb-4">
-              Latest Episodes
-            </h2>
-            <p className="font-body text-lg text-charcoal-light max-w-2xl mx-auto">
-              Intimate conversations with breakthrough and legacy artists. Go beyond the music and into the untold stories that shaped your favorite artists.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {podcastEpisodes.map((ep, i) => (
-              <motion.div
-                key={ep.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={i}
-                className="group bg-white rounded-sm overflow-hidden border border-border hover:shadow-xl hover:shadow-burgundy/5 transition-all duration-500"
-              >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <img
-                    src={ep.image}
-                    alt={ep.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-burgundy-dark/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 glass-dark rounded-sm text-cream font-body text-xs font-medium">
-                      <Play size={12} className="text-gold" />
-                      {ep.subtitle}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold text-charcoal group-hover:text-burgundy transition-colors duration-300 mb-2">
-                    {ep.title}
-                  </h3>
-                  <p className="font-body text-sm text-charcoal-light leading-relaxed">
-                    {ep.description}
-                  </p>
-                </div>
+            {[
+              { num: "250+", label: "Venues" },
+              { num: "10", label: "Districts" },
+              { num: "Daily", label: "Updates" },
+            ].map((stat, i) => (
+              <motion.div key={stat.label} variants={fade} custom={i + 4}>
+                <span className="font-display text-2xl md:text-3xl font-bold text-gold block">
+                  {stat.num}
+                </span>
+                <span className="font-body text-xs text-white/40 uppercase tracking-wider">
+                  {stat.label}
+                </span>
               </motion.div>
             ))}
-          </div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={2}
-            className="text-center mt-10"
-          >
-            <Link
-              href="/podcast"
-              className="inline-flex items-center gap-2 font-body text-sm font-semibold text-burgundy hover:text-gold-dark transition-colors duration-300"
-            >
-              View All Episodes
-              <ArrowRight size={16} />
-            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ===== ABOUT / AUTHORITY SECTION ===== */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={AUSTIN_IMG}
-            alt="Austin skyline"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-burgundy-dark/85" />
-        </div>
-
-        <div className="relative container">
-          <div className="max-w-3xl mx-auto text-center">
+      {/* ===== FOUNDER ===== */}
+      <section className="py-16 md:py-24 bg-cream">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+              variants={fade} custom={1}
+              className="relative overflow-hidden aspect-[4/5] lg:aspect-[3/4]"
             >
-              <motion.span
-                variants={fadeUp}
-                custom={0}
-                className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-3 block"
+              <img
+                src={AUSTIN_IMG}
+                alt="Clarissa Cardenas"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-noir/30 to-transparent" />
+            </motion.div>
+
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            >
+              <motion.p variants={fade} custom={0}
+                className="font-body text-[11px] tracking-[0.2em] uppercase text-gold-dark mb-4"
               >
-                Meet the Founder
-              </motion.span>
-              <motion.h2
-                variants={fadeUp}
-                custom={1}
-                className="font-display text-4xl md:text-5xl font-bold text-cream mb-6"
-              >
-                Clarissa Cardenas
-              </motion.h2>
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="font-accent text-xl md:text-2xl italic text-cream/80 mb-8 leading-relaxed"
-              >
-                "Nobody else is the Commissioner AND the journalist AND the coach AND the brand partner AND the platform builder. That convergence is the moat."
+                The Founder
               </motion.p>
-              <motion.div
-                variants={fadeUp}
-                custom={3}
-                className="flex flex-wrap justify-center gap-6 mb-10"
+              <motion.h2 variants={fade} custom={1}
+                className="font-display text-3xl md:text-5xl font-bold text-noir leading-tight mb-5"
               >
+                Clarissa
+                <br />
+                <span className="italic">Cardenas</span>
+              </motion.h2>
+              <motion.p variants={fade} custom={2}
+                className="font-body text-base text-noir/50 mb-6 leading-relaxed"
+              >
+                Commissioner. Journalist. Coach. Brand partner. Platform builder. The convergence of these roles is what makes Concert Queen Media unlike anything else in music media.
+              </motion.p>
+
+              <motion.div variants={fade} custom={3} className="space-y-3 mb-8">
                 {[
-                  "Austin Music Commissioner, D3",
+                  "Austin Music Commissioner, District 3",
                   "SPIN Magazine Podcast Host",
                   "iPEC Certified Life Coach",
                   "27K+ Instagram Community",
                 ].map((role) => (
-                  <span
-                    key={role}
-                    className="font-body text-sm text-cream/60 border border-cream/20 px-4 py-1.5 rounded-sm"
-                  >
-                    {role}
-                  </span>
+                  <div key={role} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 bg-gold rounded-full shrink-0" />
+                    <span className="font-body text-sm text-noir/60">{role}</span>
+                  </div>
                 ))}
               </motion.div>
-              <motion.div variants={fadeUp} custom={4}>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-gold text-burgundy-dark font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300"
-                >
-                  Learn More
-                  <ArrowRight size={16} />
+
+              <motion.div variants={fade} custom={4}>
+                <Link href="/about" className="text-link text-noir hover:text-gold-dark">
+                  Full Story
+                  <ArrowRight size={14} />
                 </Link>
               </motion.div>
             </motion.div>
@@ -494,81 +433,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== BRAND PARTNERS ===== */}
-      <section className="py-16 md:py-20 bg-white">
+      {/* ===== TRUSTED BY ===== */}
+      <section className="py-14 md:py-20 bg-white border-t border-noir/5">
         <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={0}
-            className="text-center mb-10"
+          <motion.p
+            initial="hidden" whileInView="visible" viewport={{ once: true }}
+            variants={fade} custom={0}
+            className="font-body text-[11px] tracking-[0.2em] uppercase text-noir/30 text-center mb-10"
           >
-            <span className="font-body text-xs tracking-[0.3em] uppercase text-charcoal-light">
-              Trusted By
-            </span>
-          </motion.div>
+            Trusted By
+          </motion.p>
 
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            initial="hidden" whileInView="visible" viewport={{ once: true }}
             className="flex flex-wrap items-center justify-center gap-8 md:gap-14"
           >
-            {partners.map((partner, i) => (
+            {partners.map((p, i) => (
               <motion.span
-                key={partner}
-                variants={fadeUp}
-                custom={i * 0.5}
-                className="font-display text-lg md:text-xl font-semibold text-charcoal/30 hover:text-burgundy transition-colors duration-500"
+                key={p}
+                variants={fade}
+                custom={i * 0.3}
+                className="font-display text-xl md:text-2xl font-bold text-noir/15 hover:text-noir/50 transition-colors duration-500 select-none"
               >
-                {partner}
+                {p}
               </motion.span>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ===== NEWSLETTER CTA ===== */}
-      <section className="py-20 md:py-24 bg-burgundy-dark">
+      {/* ===== EMAIL CAPTURE ===== */}
+      <section className="py-16 md:py-24 bg-noir">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-lg mx-auto text-center">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              initial="hidden" whileInView="visible" viewport={{ once: true }}
             >
-              <motion.span
-                variants={fadeUp}
-                custom={0}
-                className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-3 block"
+              <motion.p variants={fade} custom={0}
+                className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-4"
               >
-                Never Miss a Show
-              </motion.span>
-              <motion.h2
-                variants={fadeUp}
-                custom={1}
-                className="font-display text-4xl md:text-5xl font-bold text-cream mb-4"
+                The Newsletter
+              </motion.p>
+              <motion.h2 variants={fade} custom={1}
+                className="font-display text-3xl md:text-4xl font-bold text-white mb-4"
               >
                 Get Your <span className="italic text-gold">All Access</span> Pass
               </motion.h2>
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="font-body text-lg text-cream/60 mb-8"
+              <motion.p variants={fade} custom={2}
+                className="font-body text-sm text-white/40 mb-8 leading-relaxed"
               >
-                Exclusive concert coverage, artist interviews, venue discoveries, and Austin music policy updates delivered to your inbox.
+                Exclusive coverage, artist interviews, and insider access delivered to your inbox every week.
               </motion.p>
-              <motion.div variants={fadeUp} custom={3}>
+              <motion.div variants={fade} custom={3}>
                 <a
                   href="https://theconcertqueen.substack.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-gold text-burgundy-dark font-body font-semibold text-sm tracking-wide rounded-sm hover:bg-gold-light transition-all duration-300 hover:shadow-lg hover:shadow-gold/20"
+                  className="btn-primary"
                 >
                   Subscribe on Substack
-                  <ArrowRight size={16} />
+                  <ArrowRight size={15} />
                 </a>
               </motion.div>
             </motion.div>
