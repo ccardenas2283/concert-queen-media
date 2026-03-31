@@ -1,6 +1,6 @@
 /*
  * CONTACT PAGE: Editorial Noir Design
- * Minimal, premium inquiry form — fills viewport properly
+ * Minimal, premium inquiry form
  */
 
 import { useState } from "react";
@@ -41,7 +41,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div>
       {/* ===== HERO ===== */}
       <section className="bg-noir pt-28 md:pt-36 pb-16 md:pb-20">
         <div className="container">
@@ -66,7 +66,7 @@ export default function Contact() {
       </section>
 
       {/* ===== FORM + INFO ===== */}
-      <section className="flex-1 py-16 md:py-24 bg-cream">
+      <section className="py-16 md:py-24 bg-cream">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
             {/* Form */}

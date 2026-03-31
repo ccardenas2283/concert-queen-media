@@ -55,16 +55,20 @@ interface CityData {
   };
 }
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/hero-concert-7Mabueq7uJitiCXb6NmUGd.webp";
-const AUSTIN_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/austin-skyline-VaS4wYUu5NeJeLNcGPH3zd.webp";
-const VENUE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/venue-interior-ATXFmubS8U7nye2txhgMWE.webp";
+const CITY_HERO_IMAGES: Record<string, string> = {
+  austin: "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-austin-87FQHw272JMjzCwz642o9e.webp",
+  miami: "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-miami-E3bnFJgykGY6czhSFH2TNR.webp",
+  "los-angeles": "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-la-CBE4AS67UYf6q4joQpCak7.webp",
+  "new-york": "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-nyc-DJt6Sy7JzY9H5fiWorfvgN.webp",
+};
+const HERO_FALLBACK = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/hero-concert-7Mabueq7uJitiCXb6NmUGd.webp";
 
 const cityDatabase: Record<string, CityData> = {
   austin: {
     name: "Austin",
     slug: "austin",
     tagline: "Live Music Capital of the World",
-    heroImage: HERO_IMG,
+    heroImage: CITY_HERO_IMAGES.austin,
     description: "Over 250 live music venues across 10 council districts. From Sixth Street honky-tonks to East Austin warehouses, this is where live music lives.",
     active: true,
     events: [
@@ -102,7 +106,7 @@ const cityDatabase: Record<string, CityData> = {
     name: "Miami",
     slug: "miami",
     tagline: "Where Bass Meets the Beach",
-    heroImage: HERO_IMG,
+    heroImage: CITY_HERO_IMAGES.miami,
     description: "From Wynwood warehouses to South Beach clubs, Miami's music scene pulses with Latin rhythms, electronic beats, and global sounds.",
     active: false,
     events: [
@@ -125,7 +129,7 @@ const cityDatabase: Record<string, CityData> = {
     name: "Los Angeles",
     slug: "los-angeles",
     tagline: "Where Stars Are Born",
-    heroImage: HERO_IMG,
+    heroImage: CITY_HERO_IMAGES["los-angeles"],
     description: "From the Sunset Strip to Downtown warehouses, LA's music scene spans every genre and generation. The entertainment capital never sleeps.",
     active: false,
     events: [
@@ -148,7 +152,7 @@ const cityDatabase: Record<string, CityData> = {
     name: "New York",
     slug: "new-york",
     tagline: "The City That Never Stops Playing",
-    heroImage: HERO_IMG,
+    heroImage: CITY_HERO_IMAGES["new-york"],
     description: "From Brooklyn warehouses to Manhattan jazz clubs, New York is where every genre finds its audience and every night holds a discovery.",
     active: false,
     events: [

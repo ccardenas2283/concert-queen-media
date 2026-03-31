@@ -153,7 +153,7 @@ export default function Press() {
                 key={p}
                 variants={fade}
                 custom={i * 0.2}
-                className="font-display text-2xl md:text-3xl font-bold text-noir/12 hover:text-noir/40 transition-colors duration-500 select-none"
+                className="font-display text-2xl md:text-3xl font-bold text-noir/35 hover:text-noir/60 transition-colors duration-500 select-none"
               >
                 {p}
               </motion.span>
