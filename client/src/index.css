@@ -9,7 +9,7 @@
  * Palette:
  *   - Jet Black (#0A0A0A) — primary dark, editorial authority
  *   - Deep Red (#9B1B30) — accent, passion, live music energy
- *   - Gold (#C5A55A) — VIP, premium, CTAs
+ *   - Light Red (#E05A6B) — VIP, premium, CTAs (replaces gold)
  *   - Soft Cream (#FAF7F2) — warm light backgrounds
  *   - White (#FFFFFF) — clean sections
  *
@@ -68,9 +68,9 @@
   --color-deep-red: oklch(0.42 0.18 18);
   --color-deep-red-light: oklch(0.48 0.16 18);
   --color-deep-red-dark: oklch(0.35 0.18 18);
-  --color-gold: oklch(0.76 0.10 85);
-  --color-gold-light: oklch(0.82 0.08 85);
-  --color-gold-dark: oklch(0.65 0.10 85);
+  --color-gold: oklch(0.68 0.16 15);
+  --color-gold-light: oklch(0.74 0.14 15);
+  --color-gold-dark: oklch(0.58 0.16 15);
   --color-cream: oklch(0.97 0.008 85);
   --color-cream-dark: oklch(0.94 0.01 85);
   --color-smoke: oklch(0.55 0.005 285);
@@ -84,8 +84,8 @@
   --card-foreground: oklch(0.12 0.003 285);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.12 0.003 285);
-  --primary: oklch(0.76 0.10 85);
-  --primary-foreground: oklch(0.12 0.003 285);
+  --primary: oklch(0.68 0.16 15);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.94 0.01 85);
   --secondary-foreground: oklch(0.12 0.003 285);
   --muted: oklch(0.94 0.008 85);
@@ -96,20 +96,20 @@
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.90 0.008 85);
   --input: oklch(0.90 0.008 85);
-  --ring: oklch(0.76 0.10 85);
+  --ring: oklch(0.68 0.16 15);
   --chart-1: oklch(0.42 0.18 18);
-  --chart-2: oklch(0.76 0.10 85);
+  --chart-2: oklch(0.68 0.16 15);
   --chart-3: oklch(0.12 0.003 285);
-  --chart-4: oklch(0.65 0.10 85);
+  --chart-4: oklch(0.58 0.16 15);
   --chart-5: oklch(0.55 0.005 285);
   --sidebar: oklch(0.12 0.003 285);
   --sidebar-foreground: oklch(0.97 0.008 85);
-  --sidebar-primary: oklch(0.76 0.10 85);
-  --sidebar-primary-foreground: oklch(0.12 0.003 285);
+  --sidebar-primary: oklch(0.68 0.16 15);
+  --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.18 0.003 285);
   --sidebar-accent-foreground: oklch(0.97 0.008 85);
   --sidebar-border: oklch(0.24 0.003 285);
-  --sidebar-ring: oklch(0.76 0.10 85);
+  --sidebar-ring: oklch(0.68 0.16 15);
 }
 
 @layer base {
@@ -164,26 +164,26 @@
     }
   }
 
-  /* Gold horizontal rule */
+  /* Accent horizontal rule */
   .gold-rule {
     height: 1px;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      oklch(0.76 0.10 85) 20%,
-      oklch(0.76 0.10 85) 80%,
+      oklch(0.68 0.16 15) 20%,
+      oklch(0.68 0.16 15) 80%,
       transparent 100%
     );
   }
 
-  /* Primary CTA button — gold filled */
+  /* Primary CTA button — light red filled */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 2rem;
-    background: oklch(0.76 0.10 85);
-    color: oklch(0.12 0.003 285);
+    background: oklch(0.68 0.16 15);
+    color: oklch(1 0 0);
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 0.8125rem;
@@ -192,8 +192,8 @@
     transition: all 0.3s ease;
   }
   .btn-primary:hover {
-    background: oklch(0.82 0.08 85);
-    box-shadow: 0 4px 20px oklch(0.76 0.10 85 / 0.25);
+    background: oklch(0.74 0.14 15);
+    box-shadow: 0 4px 20px oklch(0.68 0.16 15 / 0.3);
   }
 
   /* Secondary CTA — outline */
@@ -257,7 +257,7 @@ html {
 
 /* Selection */
 ::selection {
-  background: oklch(0.76 0.10 85 / 0.3);
+  background: oklch(0.68 0.16 15 / 0.3);
   color: oklch(0.12 0.003 285);
 }
 
@@ -269,9 +269,9 @@ html {
   background: oklch(0.94 0.008 85);
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.76 0.10 85 / 0.4);
+  background: oklch(0.68 0.16 15 / 0.4);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.76 0.10 85 / 0.6);
+  background: oklch(0.68 0.16 15 / 0.6);
 }
