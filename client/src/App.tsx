@@ -10,6 +10,7 @@ import Podcast from "./pages/Podcast";
 import Press from "./pages/Press";
 import Contact from "./pages/Contact";
 import CityPage from "./pages/CityPage";
+import Festivals from "./pages/Festivals";
 import Layout from "./components/Layout";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
         <Route path="/press" component={Press} />
         <Route path="/contact" component={Contact} />
         <Route path="/city/:slug" component={CityPage} />
+        <Route path="/festivals" component={Festivals} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
