@@ -300,7 +300,7 @@ export default function Home() {
                 <span className="italic text-gold">Boys Noize</span>
               </h3>
               <p className="font-body text-base text-white/45 leading-relaxed mb-8 max-w-md">
-                Grammy-winning producer on TRON: Ares, Nine Inch Noize at Coachella, and exclusive crate digging at Waterloo Records.
+                Grammy-winning producer on TRON: Ares, Nine Inch Noize at Coachella, and exclusive crate digging at Waterloo Records in Austin, TX.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="/podcast" className="btn-primary justify-center">
@@ -350,7 +350,7 @@ export default function Home() {
             <motion.p variants={fade} custom={2}
               className="font-body text-base text-white/50 mb-8 leading-relaxed"
             >
-              The definitive guide to every stage across Austin's 10 council districts.
+              The definitive guide to every stage across Austin.
             </motion.p>
             <motion.div variants={fade} custom={3}>
               <Link href="/city/austin" className="btn-primary">
