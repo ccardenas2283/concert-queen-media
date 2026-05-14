@@ -3,7 +3,7 @@
  * Single focus: "What's happening in Austin this week?" → Get Tickets
  * 
  * Structure:
- * 1. Minimal Hero (5 sec read)
+ * 1. Clean Hero (Austin Tourism style) — professional, elegant
  * 2. Current/Upcoming Shows (THIS WEEK) — primary conversion driver
  * 3. City Selector (Austin featured, others coming soon)
  * 4. Festivals (ACL, SXSW, etc. with Ticketmaster links)
@@ -103,46 +103,52 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-noir">
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 1: MINIMAL HERO — "What's happening this week?" */}
+      {/* SECTION 1: CLEAN HERO — Austin Tourism style, elegant & professional */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative h-screen max-h-[900px] flex items-center justify-center overflow-hidden bg-noir">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src={HERO_IMG}
-            alt="Austin Live Music"
-            className="w-full h-full object-cover"
-          />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-noir/60"></div>
-        </div>
-
+      <section className="relative flex items-center justify-center overflow-hidden bg-gradient-to-b from-cream via-cream to-white/95 py-24 md:py-32">
         {/* Content */}
-        <div className="relative z-10 container max-w-3xl text-center px-6 py-20">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+        <div className="container max-w-4xl text-center px-6">
+          {/* Branding */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-8"
           >
-            What's Happening
-            <br />
-            <span className="text-gold italic">This Week</span>
-          </motion.h1>
+            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+              Live Music Discovery
+            </p>
+            <h1 className="font-display text-6xl md:text-7xl font-bold text-noir mb-4 leading-tight">
+              Concert Queen
+            </h1>
+            <div className="h-1 w-24 bg-gold mx-auto mb-8"></div>
+          </motion.div>
 
+          {/* Tagline */}
           <motion.p
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="font-body text-lg text-white/70 mb-10 leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-2xl md:text-3xl text-noir/80 mb-6 leading-relaxed font-light"
           >
-            Austin's best concerts, festivals, and live music. Get tickets instantly.
+            Discover Austin's best concerts, festivals, and live music.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="font-body text-base text-noir/60 mb-12 max-w-2xl mx-auto leading-relaxed"
+          >
+            Curated by Clarissa Cardenas, Austin Music Commissioner & SPIN Podcast Host. Get tickets instantly.
+          </motion.p>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a href="#shows" className="btn-primary justify-center">
@@ -159,15 +165,19 @@ export default function Home() {
       <section id="shows" className="py-24 bg-white">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="mb-16"
           >
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-3">
+            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+              Current Events
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-4">
               This Week in Austin
             </h2>
-            <p className="font-body text-lg text-noir/60 mb-12">
+            <p className="font-body text-base text-noir/60">
               Current and upcoming shows. Get tickets now.
             </p>
           </motion.div>
@@ -182,14 +192,14 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 {/* Date Header */}
-                <div className="bg-white/5 border-t border-b border-white/10 py-4 px-6 sticky top-0 z-10">
+                <div className="bg-white/5 border-t border-b border-noir/10 py-4 px-6 sticky top-0 z-10">
                   <p className="text-gold font-semibold text-xs uppercase tracking-widest mb-1">
                     {dateGroup.fullDate}
                   </p>
                 </div>
 
                 {/* Events for this date */}
-                <div className="divide-y divide-white/10">
+                <div className="divide-y divide-noir/10">
                   {dateGroup.events.map((event, eventIdx) => (
                     <motion.div
                       key={eventIdx}
@@ -197,15 +207,15 @@ export default function Home() {
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: eventIdx * 0.05, duration: 0.4 }}
                       viewport={{ once: true }}
-                      className="py-5 px-6 hover:bg-white/5 transition-colors group"
+                      className="py-5 px-6 hover:bg-noir/5 transition-colors group"
                     >
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         {/* Left: Artist & Venue */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-display text-lg md:text-xl font-bold text-white truncate group-hover:text-gold transition-colors">
+                          <h4 className="font-display text-lg md:text-xl font-bold text-noir truncate group-hover:text-gold transition-colors">
                             {event.artist}
                           </h4>
-                          <div className="flex items-center gap-2 text-white/60 text-sm mt-1">
+                          <div className="flex items-center gap-2 text-noir/60 text-sm mt-1">
                             <MapPin className="w-4 h-4 text-gold flex-shrink-0" />
                             <span className="truncate">{event.venue}</span>
                           </div>
@@ -238,7 +248,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="mt-12 text-center border-t border-white/10 pt-12"
+            className="mt-12 text-center border-t border-noir/10 pt-12"
           >
             <Link href="/city/austin" className="btn-secondary inline-flex items-center gap-2">
               View All Austin Shows <ChevronRight className="w-4 h-4" />
@@ -253,15 +263,19 @@ export default function Home() {
       <section className="py-24 bg-noir">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="mb-16 text-center"
           >
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-3">
+            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+              Expanding
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
               Choose Your City
             </h2>
-            <p className="font-body text-lg text-white/60 mb-12">
+            <p className="font-body text-base text-white/60 max-w-2xl mx-auto">
               Austin is our home. Coming soon: Miami, LA, NYC.
             </p>
           </motion.div>
@@ -274,25 +288,22 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
+                className="group relative overflow-hidden rounded-lg h-64 cursor-pointer"
               >
-                <Link href={`/city/${city.slug}`}>
-                  <div className="relative h-64 rounded-lg overflow-hidden group cursor-pointer">
-                    <img
-                      src={city.image}
-                      alt={city.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-noir/40 group-hover:bg-noir/50 transition-colors"></div>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <h3 className="font-display text-3xl font-bold text-white mb-2">
-                        {city.name}
-                      </h3>
-                      <p className="text-gold text-sm font-semibold">
-                        {city.label}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <img
+                  src={city.image}
+                  alt={city.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-noir/40 group-hover:bg-noir/50 transition-colors"></div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <h3 className="font-display text-3xl font-bold text-white mb-2">
+                    {city.name}
+                  </h3>
+                  <p className="text-gold text-sm uppercase tracking-wider font-semibold">
+                    {city.label}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -300,47 +311,67 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 4: FESTIVALS */}
+      {/* SECTION 4: AUSTIN FESTIVALS */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="mb-16 text-center"
           >
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-3">
+            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+              Major Events
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-4">
               Austin Festivals
             </h2>
-            <p className="font-body text-lg text-noir/60 mb-12">
+            <p className="font-body text-base text-noir/60 max-w-2xl mx-auto">
               Major festivals and events. Get tickets and insider coverage.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {festivals.map((festival, idx) => (
-              <motion.a
+              <motion.div
                 key={idx}
-                href={festival.ticketmasterUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.08, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-noir text-white p-8 rounded-lg hover:shadow-lg hover:bg-noir/90 transition-all group"
+                className="bg-noir text-white p-8 rounded-lg hover:shadow-lg border border-white/10 hover:border-gold/50 transition-all"
               >
-                <h3 className="font-display text-2xl font-bold mb-2 group-hover:text-gold transition-colors">
+                <h3 className="font-display text-2xl font-bold mb-3">
                   {festival.name}
                 </h3>
-                <p className="text-white/60 mb-4">{festival.date}</p>
-                <div className="flex items-center gap-2 text-gold text-sm font-semibold">
-                  Get Tickets <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </motion.a>
+                <p className="text-gold text-sm uppercase tracking-wider font-semibold mb-6">
+                  {festival.date}
+                </p>
+                <a
+                  href={festival.ticketmasterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors font-semibold"
+                >
+                  Get Tickets <ArrowRight className="w-4 h-4" />
+                </a>
+              </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <Link href="/festivals" className="btn-primary inline-flex items-center gap-2">
+              View All Festivals <ChevronRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -349,88 +380,102 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-24 bg-noir">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Image */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="relative h-96 rounded-lg overflow-hidden"
             >
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+              <img
+                src={VENUE_IMG}
+                alt="Austin Venues"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+                Discovery
+              </p>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
                 Discover the Best Venues
               </h2>
-              <p className="font-body text-lg text-white/70 mb-8 leading-relaxed">
+              <p className="font-body text-base text-white/70 mb-8 leading-relaxed">
                 The definitive guide to every stage across Austin. Capacity, acoustics, history, and what's coming.
               </p>
               <Link href="/city/austin" className="btn-primary inline-flex items-center gap-2">
                 Explore Venue Guide <ChevronRight className="w-4 h-4" />
               </Link>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="rounded-lg overflow-hidden"
-            >
-              <img
-                src={VENUE_IMG}
-                alt="Austin Venues"
-                className="w-full h-96 object-cover rounded-lg"
-              />
-            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 6: EMAIL CAPTURE — AGGRESSIVE */}
+      {/* SECTION 6: EMAIL CAPTURE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white">
-        <div className="container max-w-2xl">
+        <div className="container max-w-2xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="mb-12"
           >
+            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+              Stay Connected
+            </p>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-4">
               Get the Austin Concert Calendar
             </h2>
-            <p className="font-body text-lg text-noir/60 mb-10">
+            <p className="font-body text-base text-noir/60">
               Every Monday morning: what's happening this week, insider picks, and exclusive content.
             </p>
-
-            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 px-6 py-4 bg-white border-2 border-noir/20 rounded-lg font-body text-noir placeholder-noir/40 focus:outline-none focus:border-gold transition-colors"
-              />
-              <button
-                type="submit"
-                className="btn-primary px-8 py-4 whitespace-nowrap justify-center flex items-center gap-2"
-              >
-                <Mail className="w-5 h-5" />
-                Subscribe
-              </button>
-            </form>
-
-            {subscribed && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-gold font-semibold mt-4"
-              >
-                ✓ Check your email to confirm
-              </motion.p>
-            )}
           </motion.div>
+
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            onSubmit={handleEmailSubmit}
+            className="flex flex-col sm:flex-row gap-3 mb-6"
+          >
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-1 px-6 py-3 bg-noir/5 border border-noir/20 rounded text-noir placeholder:text-noir/40 focus:outline-none focus:border-gold/50 transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-8 py-3 bg-gold text-noir font-semibold rounded hover:bg-gold/90 transition-colors whitespace-nowrap"
+            >
+              Subscribe
+            </button>
+          </motion.form>
+
+          {subscribed && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-gold text-sm font-semibold"
+            >
+              ✓ Check your email to confirm
+            </motion.p>
+          )}
         </div>
       </section>
 
@@ -439,10 +484,10 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-16 bg-noir border-t border-white/10">
         <div className="container">
-          <p className="font-body text-sm text-white/50 uppercase tracking-widest text-center mb-8">
+          <p className="text-center text-white/50 text-sm uppercase tracking-widest font-semibold mb-12">
             Trusted By
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {partners.map((partner, idx) => (
               <motion.div
                 key={idx}
@@ -450,7 +495,7 @@ export default function Home() {
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: idx * 0.05, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="text-white/40 font-semibold text-sm hover:text-gold transition-colors"
+                className="text-white/40 font-semibold text-sm hover:text-gold/60 transition-colors"
               >
                 {partner}
               </motion.div>
