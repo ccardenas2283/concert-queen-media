@@ -45,33 +45,33 @@ const cities = [
 ];
 
 const thisWeekShows = [
-  { 
-    artist: "Seismic Dance Event 8.0", 
-    date: "Apr 12", 
-    venue: "The Concourse Project", 
-    genre: "Electronic",
-    ticketmasterUrl: "https://www.ticketmaster.com"
+  {
+    fullDate: "Saturday, April 12",
+    dateShort: "Apr 12",
+    events: [
+      { artist: "Seismic Dance Event 8.0", venue: "The Concourse Project", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com" },
+    ]
   },
-  { 
-    artist: "Adam Beyer", 
-    date: "Apr 18", 
-    venue: "Kingdom Austin", 
-    genre: "Techno",
-    ticketmasterUrl: "https://www.ticketmaster.com"
+  {
+    fullDate: "Friday, April 18",
+    dateShort: "Apr 18",
+    events: [
+      { artist: "Adam Beyer", venue: "Kingdom Austin", genre: "Techno", ticketmasterUrl: "https://www.ticketmaster.com" },
+    ]
   },
-  { 
-    artist: "Simon Doty", 
-    date: "May 3", 
-    venue: "The Venue ATX", 
-    genre: "Progressive House",
-    ticketmasterUrl: "https://www.ticketmaster.com"
+  {
+    fullDate: "Saturday, May 3",
+    dateShort: "May 3",
+    events: [
+      { artist: "Simon Doty", venue: "The Venue ATX", genre: "Progressive House", ticketmasterUrl: "https://www.ticketmaster.com" },
+    ]
   },
-  { 
-    artist: "Boys Noize", 
-    date: "May 15", 
-    venue: "Empire Control Room", 
-    genre: "Electronic",
-    ticketmasterUrl: "https://www.ticketmaster.com"
+  {
+    fullDate: "Wednesday, May 15",
+    dateShort: "May 15",
+    events: [
+      { artist: "Boys Noize", venue: "Empire Control Room", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com" },
+    ]
   },
 ];
 
@@ -172,52 +172,71 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {thisWeekShows.map((show, idx) => (
+          <div className="space-y-12">
+            {thisWeekShows.map((dateGroup, dateIdx) => (
               <motion.div
-                key={idx}
+                key={dateIdx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                transition={{ delay: dateIdx * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-noir text-white p-8 rounded-lg hover:shadow-lg transition-shadow"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <p className="text-gold font-semibold text-sm uppercase tracking-wide mb-2">
-                      {show.genre}
-                    </p>
-                    <h3 className="font-display text-2xl font-bold mb-2">
-                      {show.artist}
-                    </h3>
-                  </div>
+                {/* Date Header */}
+                <div className="border-b border-white/20 pb-4 mb-6">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold text-white">
+                    {dateGroup.fullDate}
+                  </h3>
                 </div>
 
-                <div className="flex flex-col gap-3 mb-6 text-white/70 text-sm">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-gold" />
-                    {show.venue}
-                  </div>
-                  <div>{show.date}</div>
-                </div>
+                {/* Events for this date */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {dateGroup.events.map((event, eventIdx) => (
+                    <motion.div
+                      key={eventIdx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: eventIdx * 0.08, duration: 0.6 }}
+                      viewport={{ once: true }}
+                      className="bg-noir text-white p-8 rounded-lg hover:shadow-lg hover:border-gold/50 border border-white/10 transition-all"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <p className="text-gold font-semibold text-sm uppercase tracking-wide mb-2">
+                            {event.genre}
+                          </p>
+                          <h4 className="font-display text-2xl font-bold mb-2">
+                            {event.artist}
+                          </h4>
+                        </div>
+                      </div>
 
-                <div className="flex flex-col gap-3">
-                  <a
-                    href={show.ticketmasterUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary justify-center w-full"
-                  >
-                    Get Tickets
-                  </a>
-                  <a
-                    href="https://www.stubhub.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gold text-sm hover:text-gold/80 transition-colors text-center flex items-center justify-center gap-1"
-                  >
-                    Sold out? Find resale on StubHub <ArrowRight className="w-4 h-4" />
-                  </a>
+                      <div className="flex flex-col gap-3 mb-6 text-white/70 text-sm">
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-gold" />
+                          {event.venue}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-3">
+                        <a
+                          href={event.ticketmasterUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary justify-center w-full"
+                        >
+                          Get Tickets
+                        </a>
+                        <a
+                          href="https://www.stubhub.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gold text-sm hover:text-gold/80 transition-colors text-center flex items-center justify-center gap-1"
+                        >
+                          Sold out? Find resale on StubHub <ArrowRight className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -228,7 +247,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
             <Link href="/city/austin" className="btn-secondary inline-flex items-center gap-2">
               View All Austin Shows <ChevronRight className="w-4 h-4" />
