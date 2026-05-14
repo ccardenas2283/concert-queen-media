@@ -172,68 +172,59 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="space-y-12">
+          <div className="space-y-0">
             {thisWeekShows.map((dateGroup, dateIdx) => (
               <motion.div
                 key={dateIdx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: dateIdx * 0.1, duration: 0.6 }}
+                transition={{ delay: dateIdx * 0.08, duration: 0.6 }}
                 viewport={{ once: true }}
               >
                 {/* Date Header */}
-                <div className="border-b border-white/20 pb-4 mb-6">
-                  <h3 className="font-display text-2xl md:text-3xl font-bold text-white">
+                <div className="bg-white/5 border-t border-b border-white/10 py-4 px-6 sticky top-0 z-10">
+                  <p className="text-gold font-semibold text-xs uppercase tracking-widest mb-1">
                     {dateGroup.fullDate}
-                  </h3>
+                  </p>
                 </div>
 
                 {/* Events for this date */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="divide-y divide-white/10">
                   {dateGroup.events.map((event, eventIdx) => (
                     <motion.div
                       key={eventIdx}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: eventIdx * 0.08, duration: 0.6 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: eventIdx * 0.05, duration: 0.4 }}
                       viewport={{ once: true }}
-                      className="bg-noir text-white p-8 rounded-lg hover:shadow-lg hover:border-gold/50 border border-white/10 transition-all"
+                      className="py-5 px-6 hover:bg-white/5 transition-colors group"
                     >
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <p className="text-gold font-semibold text-sm uppercase tracking-wide mb-2">
-                            {event.genre}
-                          </p>
-                          <h4 className="font-display text-2xl font-bold mb-2">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        {/* Left: Artist & Venue */}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-display text-lg md:text-xl font-bold text-white truncate group-hover:text-gold transition-colors">
                             {event.artist}
                           </h4>
+                          <div className="flex items-center gap-2 text-white/60 text-sm mt-1">
+                            <MapPin className="w-4 h-4 text-gold flex-shrink-0" />
+                            <span className="truncate">{event.venue}</span>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex flex-col gap-3 mb-6 text-white/70 text-sm">
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-gold" />
-                          {event.venue}
+                        {/* Right: Genre & CTA */}
+                        <div className="flex items-center gap-4 md:justify-end">
+                          <span className="text-gold text-xs uppercase tracking-wider font-semibold whitespace-nowrap">
+                            {event.genre}
+                          </span>
+                          <a
+                            href={event.ticketmasterUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2 bg-gold text-noir font-semibold text-sm rounded hover:bg-gold/90 transition-colors whitespace-nowrap"
+                          >
+                            Get Tickets <ArrowRight className="w-4 h-4" />
+                          </a>
                         </div>
-                      </div>
-
-                      <div className="flex flex-col gap-3">
-                        <a
-                          href={event.ticketmasterUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-primary justify-center w-full"
-                        >
-                          Get Tickets
-                        </a>
-                        <a
-                          href="https://www.stubhub.com"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gold text-sm hover:text-gold/80 transition-colors text-center flex items-center justify-center gap-1"
-                        >
-                          Sold out? Find resale on StubHub <ArrowRight className="w-4 h-4" />
-                        </a>
                       </div>
                     </motion.div>
                   ))}
@@ -247,7 +238,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="mt-16 text-center"
+            className="mt-12 text-center border-t border-white/10 pt-12"
           >
             <Link href="/city/austin" className="btn-secondary inline-flex items-center gap-2">
               View All Austin Shows <ChevronRight className="w-4 h-4" />
