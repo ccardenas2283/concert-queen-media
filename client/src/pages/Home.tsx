@@ -49,28 +49,28 @@ const thisWeekShows = [
     fullDate: "Saturday, April 12",
     dateShort: "Apr 12",
     events: [
-      { artist: "Seismic Dance Event 8.0", venue: "The Concourse Project", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com" },
+      { artist: "Seismic Dance Event 8.0", venue: "The Concourse Project", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
   {
     fullDate: "Friday, April 18",
     dateShort: "Apr 18",
     events: [
-      { artist: "Adam Beyer", venue: "Kingdom Austin", genre: "Techno", ticketmasterUrl: "https://www.ticketmaster.com" },
+      { artist: "Adam Beyer", venue: "Kingdom Austin", genre: "Techno", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
   {
     fullDate: "Saturday, May 3",
     dateShort: "May 3",
     events: [
-      { artist: "Simon Doty", venue: "The Venue ATX", genre: "Progressive House", ticketmasterUrl: "https://www.ticketmaster.com" },
+      { artist: "Simon Doty", venue: "The Venue ATX", genre: "Progressive House", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
   {
     fullDate: "Wednesday, May 15",
     dateShort: "May 15",
     events: [
-      { artist: "Boys Noize", venue: "Empire Control Room", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com" },
+      { artist: "Boys Noize", venue: "Empire Control Room", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
 ];
@@ -222,17 +222,28 @@ export default function Home() {
                         </div>
 
                         {/* Right: Genre & CTA */}
-                        <div className="flex items-center gap-4 md:justify-end">
-                          <span className="text-gold text-xs uppercase tracking-wider font-semibold whitespace-nowrap">
-                            {event.genre}
-                          </span>
+                        <div className="flex flex-col items-start md:items-end gap-2 md:justify-end">
+                          <div className="flex items-center gap-4">
+                            <span className="text-gold text-xs uppercase tracking-wider font-semibold whitespace-nowrap">
+                              {event.genre}
+                            </span>
+                            <a
+                              href={event.ticketmasterUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-5 py-2 bg-gold text-noir font-semibold text-sm rounded hover:bg-gold/90 transition-colors whitespace-nowrap"
+                            >
+                              Get Tickets <ArrowRight className="w-4 h-4" />
+                            </a>
+                          </div>
+                          {/* StubHub Resale Fallback */}
                           <a
-                            href={event.ticketmasterUrl}
+                            href={event.stubhubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2 bg-gold text-noir font-semibold text-sm rounded hover:bg-gold/90 transition-colors whitespace-nowrap"
+                            className="text-noir/50 hover:text-gold text-xs transition-colors flex items-center gap-1"
                           >
-                            Get Tickets <ArrowRight className="w-4 h-4" />
+                            Sold out? Find resale on StubHub →
                           </a>
                         </div>
                       </div>

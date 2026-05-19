@@ -1,0 +1,37 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": [
+    "no_db_push"
+  ],
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9",
+    "access_key_id": "ASIAZV3A2ECZB7VXNUZ7",
+    "secret_access_key": "daQ8M2fDuCsum1aGzF78uBBvO4p1DfmQ0wvhDZCR",
+    "session_token": "IQoJb3JpZ2luX2VjEAQaCXVzLWVhc3QtMSJHMEUCIQDSii0N+4ShtQ2LMi/qjg8FVQoeSSR6fnxSKGKFNnN3PgIgeEQMKSvRSegxXJ8AorkVQIGSAYPUUV8u/0Ec80WdDIQq/wMIzf//////////ARAEGgw2NjUzODYwOTg4NjYiDMnV14mdDE4SIFspwSrTA2+x8EsGSHLBVUgBYZFs8qD3igOnK2W8gzLZ6d4mz1xN2CvFcNNo2eZ4ceyfQcHlyA7cocjMka/zrY2n6qM4tq+6SKXwE2HZY1IhcZvIin0wP2eMDYrGY/vGORfCzcSJjzCX0iDOBS/8JM7ZRDU8L9UFUI8sFh/abe3E1PY4bDhBv758mHH3W+SUr5bV6QAjonx/Nm/hGsHkVAzcrslUhVKxMvTi/Gk04bjHacx+5o+4E2ojEDN24pPpqe6M59flXcQRgSB7ioPtEMqREPJGfxUYGlk36iAtRkdMpPGxxmnlBGfvPi1dXw8Vi7cROV4vdD3ZyniicWhgmby1vf7V4Sln6P+UdbCNb6TGhUHmMHzU8IR1tbwmVESHqMnb//pIBVzZtZ9/azlSBhkqpO3C3Rwm2RTNDIWz5WqBGkvMXHJPzlkwj9bya23L0+/8CQWK22yfSwmv7LakFABXE66lFGJp75Wy9WJMVJca1eVUQ1yj7f3DB9fvGDSCL0gOI33iHFDli1q8Gt1Ki/VaCrtv2cir1oPXZ9t7sXz8TtaGHi0kV/O86ubuaHmQZ+G4cPluaqrf8dD2b4GN4rOx1bDdUACXxyTUH0isTAFiTDY3AUwm8FZyMPyvr9AGOp0BRbYEgUkGIerecmtBB+4nmwsOqmOX2K0IgsgGM6kQ9xOyCZNze0j0Kf53KzInZmHdvug/XyfaFgKq3Sqc0CKxWAuLjT1rJ7rNNMQg+ApPQPyT2nfDWR7lisOpHkcW1QA9gJwZvpcdaOsxGebxvoXNB7kWioHIl6yFDvbWcrvCcTmfMMUD2WhlJVqOw46DcuKuE8irxyhm/NmEDloDYw==",
+    "expiration": "2026-05-19T15:24:44.000Z"
+  },
+  "name": "concert-queen-media",
+  "path": "/home/ubuntu/concert-queen-media",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "ne3xhnb6sYAMPLWTWetdEb",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "XHCBMHH7nCmQ4ysAMcAuPV",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Clarissa Cardenas",
+    "OWNER_OPEN_ID": "TiDLwFnWAqi5LVbypUxke7",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "b779d3bf-6278-430e-a122-82ce66f857de",
+    "VITE_APP_ID": "cD3sEqPdYNiYcnDcSXSGe9",
+    "VITE_APP_LOGO": "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/310519663497210246/GoQiORABmuFFHRVu.png",
+    "VITE_APP_TITLE": "Concert Queen Media",
+    "VITE_FRONTEND_FORGE_API_KEY": "LSiMd2MXiMcDaWUzG9NBnY",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
