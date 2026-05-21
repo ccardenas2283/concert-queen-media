@@ -13,7 +13,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { MapPin, ArrowRight, ChevronRight, Music, Mail, Calendar, Heart } from "lucide-react";
+import { MapPin, ArrowRight, ChevronRight, Music, Mail, Calendar, Heart, Share2 } from "lucide-react";
 import { useState, useEffect } from "react";
 
 /* ── Fade-in animation ── */
@@ -223,14 +223,35 @@ export default function Home() {
                 <p className="text-gold text-xs uppercase tracking-wider font-semibold mb-4">
                   {show.date} • {show.genre}
                 </p>
-                <a
-                  href={show.ticketmasterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors font-semibold text-sm"
-                >
-                  Get Tickets <ArrowRight className="w-3 h-3" />
-                </a>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={show.ticketmasterUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors font-semibold text-sm"
+                  >
+                    Get Tickets <ArrowRight className="w-3 h-3" />
+                  </a>
+                  <button
+                    onClick={() => {
+                      const shareText = `Check out ${show.artist} at ${show.venue} on Concert Queen! Get tickets now.`;
+                      if (navigator.share) {
+                        navigator.share({
+                          title: show.artist,
+                          text: shareText,
+                          url: window.location.href
+                        });
+                      } else {
+                        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
+                        window.open(url, '_blank');
+                      }
+                    }}
+                    className="text-gold/60 hover:text-gold transition-colors flex items-center gap-1"
+                    title="Share this event"
+                  >
+                    <Share2 className="w-3 h-3" />
+                  </button>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -346,6 +367,26 @@ export default function Home() {
                             >
                               <Calendar className="w-3 h-3" />
                               Save to Calendar
+                            </button>
+                            <button
+                              onClick={() => {
+                                const shareText = `Check out ${event.artist} at ${event.venue} on Concert Queen! Get tickets now.`;
+                                if (navigator.share) {
+                                  navigator.share({
+                                    title: event.artist,
+                                    text: shareText,
+                                    url: window.location.href
+                                  });
+                                } else {
+                                  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.href)}`;
+                                  window.open(url, '_blank');
+                                }
+                              }}
+                              className="text-noir/50 hover:text-gold text-xs transition-colors flex items-center gap-1"
+                              title="Share this event"
+                            >
+                              <Share2 className="w-3 h-3" />
+                              Share
                             </button>
                           </div>
                         </div>
