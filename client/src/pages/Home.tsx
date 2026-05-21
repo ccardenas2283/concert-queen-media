@@ -13,7 +13,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { MapPin, ArrowRight, ChevronRight, Music, Mail } from "lucide-react";
+import { MapPin, ArrowRight, ChevronRight, Music, Mail, Calendar } from "lucide-react";
 import { useState } from "react";
 
 /* ── Fade-in animation ── */
@@ -223,15 +223,27 @@ export default function Home() {
                               Get Tickets <ArrowRight className="w-4 h-4" />
                             </a>
                           </div>
-                          {/* StubHub Resale Fallback */}
-                          <a
-                            href={event.stubhubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-noir/50 hover:text-gold text-xs transition-colors flex items-center gap-1"
-                          >
-                            Sold out? Find resale on StubHub →
-                          </a>
+                          {/* StubHub Resale Fallback & Save to Calendar */}
+                          <div className="flex flex-col items-start md:items-end gap-2">
+                            <a
+                              href={event.stubhubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-noir/50 hover:text-gold text-xs transition-colors flex items-center gap-1"
+                            >
+                              Sold out? Find resale on StubHub →
+                            </a>
+                            <button
+                              onClick={() => {
+                                const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.artist + ' at ' + event.venue)}&dates=20260415T190000Z/20260415T220000Z`;
+                                window.open(googleCalendarUrl, '_blank');
+                              }}
+                              className="text-noir/50 hover:text-gold text-xs transition-colors flex items-center gap-1"
+                            >
+                              <Calendar className="w-3 h-3" />
+                              Save to Calendar
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
