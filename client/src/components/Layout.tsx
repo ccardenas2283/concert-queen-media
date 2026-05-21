@@ -18,6 +18,7 @@ const navLinks = [
   { href: "/podcast", label: "Podcast" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
+  { href: "/favorites", label: "Favorites" },
 ];
 
 const cities = [
