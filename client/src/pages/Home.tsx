@@ -78,6 +78,8 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const [selectedVenue, setSelectedVenue] = useState<string | null>(null);
 
   // Load favorites from localStorage on mount
   useEffect(() => {
@@ -95,6 +97,25 @@ export default function Home() {
   };
 
   const isFavorited = (eventId: string) => favorites.includes(eventId);
+
+  // Extract unique genres and venues from thisWeekShows
+  const allGenres = Array.from(new Set(
+    thisWeekShows.flatMap(day => day.events.map(e => e.genre))
+  )).sort();
+  
+  const allVenues = Array.from(new Set(
+    thisWeekShows.flatMap(day => day.events.map(e => e.venue))
+  )).sort();
+
+  // Filter events based on selected genre and venue
+  const filteredShows = thisWeekShows.map(day => ({
+    ...day,
+    events: day.events.filter(event => {
+      const genreMatch = !selectedGenre || event.genre === selectedGenre;
+      const venueMatch = !selectedVenue || event.venue === selectedVenue;
+      return genreMatch && venueMatch;
+    })
+  })).filter(day => day.events.length > 0);
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -281,21 +302,87 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="space-y-0">
-            {thisWeekShows.map((dateGroup, dateIdx) => (
-              <motion.div
-                key={dateIdx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: dateIdx * 0.08, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                {/* Date Header */}
-                <div className="bg-white/5 border-t border-b border-noir/10 py-4 px-6 sticky top-0 z-10">
-                  <p className="text-gold font-semibold text-xs uppercase tracking-widest mb-1">
-                    {dateGroup.fullDate}
-                  </p>
-                </div>
+          {/* Filter Controls */}
+          <div className="mt-8 flex flex-col gap-6">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-noir/50 font-semibold mb-3">Filter by Genre</p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSelectedGenre(null)}
+                  className={`px-3 py-1 text-sm border transition-all ${
+                    selectedGenre === null
+                      ? 'bg-gold text-noir border-gold'
+                      : 'border-noir/20 text-noir/60 hover:border-gold'
+                  }`}
+                >
+                  All
+                </button>
+                {allGenres.map(genre => (
+                  <button
+                    key={genre}
+                    onClick={() => setSelectedGenre(genre)}
+                    className={`px-3 py-1 text-sm border transition-all ${
+                      selectedGenre === genre
+                        ? 'bg-gold text-noir border-gold'
+                        : 'border-noir/20 text-noir/60 hover:border-gold'
+                    }`}
+                  >
+                    {genre}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase tracking-widest text-noir/50 font-semibold mb-3">Filter by Venue</p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSelectedVenue(null)}
+                  className={`px-3 py-1 text-sm border transition-all ${
+                    selectedVenue === null
+                      ? 'bg-gold text-noir border-gold'
+                      : 'border-noir/20 text-noir/60 hover:border-gold'
+                  }`}
+                >
+                  All
+                </button>
+                {allVenues.map(venue => (
+                  <button
+                    key={venue}
+                    onClick={() => setSelectedVenue(venue)}
+                    className={`px-3 py-1 text-sm border transition-all ${
+                      selectedVenue === venue
+                        ? 'bg-gold text-noir border-gold'
+                        : 'border-noir/20 text-noir/60 hover:border-gold'
+                    }`}
+                  >
+                    {venue}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-0 mt-8">
+            {filteredShows.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-noir/60">No events match your filters. Try adjusting your selection.</p>
+              </div>
+            ) : (
+              filteredShows.map((dateGroup, dateIdx) => (
+                <motion.div
+                  key={dateIdx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: dateIdx * 0.08, duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  {/* Date Header */}
+                  <div className="bg-white/5 border-t border-b border-noir/10 py-4 px-6 sticky top-0 z-10">
+                    <p className="text-gold font-semibold text-xs uppercase tracking-widest mb-1">
+                      {dateGroup.fullDate}
+                    </p>
+                  </div>
 
                 {/* Events for this date */}
                 <div className="divide-y divide-noir/10">
@@ -395,7 +482,8 @@ export default function Home() {
                   ))}
                 </div>
               </motion.div>
-            ))}
+            ))
+            )}
           </div>
 
           <motion.div
