@@ -5,11 +5,10 @@
  * Structure:
  * 1. Clean Hero (Austin Tourism style) — professional, elegant
  * 2. Current/Upcoming Shows (THIS WEEK) — primary conversion driver
- * 3. City Selector (Austin featured, others coming soon)
- * 4. Festivals (ACL, SXSW, etc. with Ticketmaster links)
- * 5. Venue Guide
- * 6. Email Capture (aggressive)
- * 7. Footer
+ * 3. Austin Festivals (ACL, SXSW, etc. with Ticketmaster links)
+ * 4. Venue Guide
+ * 5. Email Capture (aggressive)
+ * 6. Footer
  */
 
 import { motion } from "framer-motion";
@@ -31,19 +30,7 @@ const fade = {
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/hero-concert-7Mabueq7uJitiCXb6NmUGd.webp";
 const VENUE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/venue-interior-ATXFmubS8U7nye2txhgMWE.webp";
 
-const CITY_AUSTIN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-austin-87FQHw272JMjzCwz642o9e.webp";
-const CITY_MIAMI = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-miami-E3bnFJgykGY6czhSFH2TNR.webp";
-const CITY_LA = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-la-CBE4AS67UYf6q4joQpCak7.webp";
-const CITY_NYC = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3sEqPdYNiYcnDcSXSGe9/city-nyc-DJt6Sy7JzY9H5fiWorfvgN.webp";
-
 /* ── Data ── */
-const cities = [
-  { name: "Austin", slug: "austin", image: CITY_AUSTIN, featured: true, label: "Live Music Capital" },
-  { name: "Miami", slug: "miami", image: CITY_MIAMI, featured: false, label: "Coming 2026" },
-  { name: "Los Angeles", slug: "los-angeles", image: CITY_LA, featured: false, label: "Coming 2026" },
-  { name: "New York", slug: "new-york", image: CITY_NYC, featured: false, label: "Coming 2027" },
-];
-
 const thisWeekShows = [
   {
     fullDate: "Saturday, April 12",
@@ -269,7 +256,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 3: CHOOSE YOUR CITY */}
+      {/* SECTION 3: AUSTIN FESTIVALS (MOVED UP) */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-24 bg-noir">
         <div className="container">
@@ -281,65 +268,12 @@ export default function Home() {
             className="mb-16 text-center"
           >
             <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
-              Expanding
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-              Choose Your City
-            </h2>
-            <p className="font-body text-base text-white/60 max-w-2xl mx-auto">
-              Austin is our home. Coming soon: Miami, LA, NYC.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {cities.map((city, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-lg h-64 cursor-pointer"
-              >
-                <img
-                  src={city.image}
-                  alt={city.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-noir/40 group-hover:bg-noir/50 transition-colors"></div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <h3 className="font-display text-3xl font-bold text-white mb-2">
-                    {city.name}
-                  </h3>
-                  <p className="text-gold text-sm uppercase tracking-wider font-semibold">
-                    {city.label}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 4: AUSTIN FESTIVALS */}
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-16 text-center"
-          >
-            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
               Major Events
             </p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-4">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
               Austin Festivals
             </h2>
-            <p className="font-body text-base text-noir/60 max-w-2xl mx-auto">
+            <p className="font-body text-base text-white/60 max-w-2xl mx-auto">
               Major festivals and events. Get tickets and insider coverage.
             </p>
           </motion.div>
@@ -352,7 +286,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.08, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-noir text-white p-8 rounded-lg hover:shadow-lg border border-white/10 hover:border-gold/50 transition-all"
+                className="bg-white/5 text-white p-8 rounded-lg hover:shadow-lg border border-white/10 hover:border-gold/50 transition-all"
               >
                 <h3 className="font-display text-2xl font-bold mb-3">
                   {festival.name}
@@ -387,9 +321,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 5: VENUE GUIDE */}
+      {/* SECTION 4: VENUE GUIDE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-noir">
+      <section className="py-24 bg-white">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image */}
@@ -417,10 +351,10 @@ export default function Home() {
               <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
                 Discovery
               </p>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-6">
                 Discover the Best Venues
               </h2>
-              <p className="font-body text-base text-white/70 mb-8 leading-relaxed">
+              <p className="font-body text-base text-noir/70 mb-8 leading-relaxed">
                 The definitive guide to every stage across Austin. Capacity, acoustics, history, and what's coming.
               </p>
               <Link href="/city/austin" className="btn-primary inline-flex items-center gap-2">
@@ -432,9 +366,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 6: EMAIL CAPTURE */}
+      {/* SECTION 5: EMAIL CAPTURE */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-noir">
         <div className="container max-w-2xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -446,10 +380,10 @@ export default function Home() {
             <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
               Stay Connected
             </p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-noir mb-4">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
               Get the Austin Concert Calendar
             </h2>
-            <p className="font-body text-base text-noir/60">
+            <p className="font-body text-base text-white/60">
               Every Monday morning: what's happening this week, insider picks, and exclusive content.
             </p>
           </motion.div>
@@ -468,7 +402,7 @@ export default function Home() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1 px-6 py-3 bg-noir/5 border border-noir/20 rounded text-noir placeholder:text-noir/40 focus:outline-none focus:border-gold/50 transition-colors"
+              className="flex-1 px-6 py-3 bg-white/10 border border-white/20 rounded text-white placeholder:text-white/40 focus:outline-none focus:border-gold/50 transition-colors"
             />
             <button
               type="submit"
@@ -491,25 +425,25 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 7: TRUSTED BY */}
+      {/* SECTION 6: TRUSTED BY */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 bg-noir border-t border-white/10">
+      <section className="py-16 bg-white border-t border-noir/10">
         <div className="container">
-          <p className="text-center text-white/50 text-sm uppercase tracking-widest font-semibold mb-12">
+          <p className="text-center text-noir/50 text-sm uppercase tracking-widest font-semibold mb-12">
             Trusted By
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {partners.map((partner, idx) => (
-              <motion.div
+              <motion.p
                 key={idx}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: idx * 0.05, duration: 0.6 }}
+                transition={{ delay: idx * 0.05, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-white/40 font-semibold text-sm hover:text-gold/60 transition-colors"
+                className="text-noir/40 font-semibold text-sm md:text-base"
               >
                 {partner}
-              </motion.div>
+              </motion.p>
             ))}
           </div>
         </div>
