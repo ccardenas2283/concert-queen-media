@@ -21,7 +21,9 @@ const festivals = [
     date: "October 2-3, 9-10, 2026",
     location: "Zilker Park",
     description: "Austin City Limits Music Festival. Three weekends of the biggest names in music across multiple stages.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[HEADLINERS: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=acl+festival+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=acl+festival+2026",
     insiderTip: "Arrive early for Zilker Park spots. Bring sunscreen and a hydration pack.",
   },
   {
@@ -29,7 +31,9 @@ const festivals = [
     date: "March 13-22, 2026",
     location: "Downtown Austin",
     description: "South by Southwest. Film, interactive, and music conference. Thousands of showcases across the city.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[FEATURED ARTISTS: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=sxsw+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=sxsw+2026",
     insiderTip: "SXSW badges grant access to official showcases. Unofficial shows are free.",
   },
   {
@@ -37,7 +41,9 @@ const festivals = [
     date: "May 1-3, 2026",
     location: "Auditorium Shores",
     description: "Psychedelic and indie rock festival. Curated lineup of emerging and established artists.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[FEATURED ARTISTS: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=levitation+festival+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=levitation+festival+2026",
     insiderTip: "Levitation is known for surprise sets. Arrive early for best stage positions.",
   },
   {
@@ -45,7 +51,9 @@ const festivals = [
     date: "April 11-12, 2026",
     location: "The Concourse Project",
     description: "Electronic and techno festival. Multiple stages, top-tier DJs and producers.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[FEATURED DJs: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=seismic+dance+event+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=seismic+dance+event+2026",
     insiderTip: "Seismic is outdoors. Bring layers for temperature changes.",
   },
   {
@@ -53,7 +61,9 @@ const festivals = [
     date: "July 18-19, 2026",
     location: "San Marcos",
     description: "Electronic music festival on the San Marcos River. Camping and day passes available.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[FEATURED DJs: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=float+fest+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=float+fest+2026",
     insiderTip: "Float Fest includes river access. Bring water shoes and sunscreen.",
   },
   {
@@ -61,7 +71,9 @@ const festivals = [
     date: "May 9-11, 2026",
     location: "Cedar Creek Lodges",
     description: "Boutique electronic festival. Intimate setting with top electronic artists.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[FEATURED DJs: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=euphoria+festival+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=euphoria+festival+2026",
     insiderTip: "Euphoria is small and curated. Book lodging early.",
   },
   {
@@ -69,7 +81,9 @@ const festivals = [
     date: "June 6-7, 2026",
     location: "TBA",
     description: "Experimental and underground electronic festival. Cutting-edge music and art installations.",
-    ticketmasterUrl: "https://www.ticketmaster.com",
+    lineup: "[FEATURED ARTISTS: Add 5-7 artist names]",
+    ticketmasterUrl: "https://www.ticketmaster.com/search?q=oblivion+access+2026",
+    stubhubUrl: "https://www.stubhub.com/search?q=oblivion+access+2026",
     insiderTip: "Oblivion Access is underground. Follow their socials for venue announcements.",
   },
 ];
@@ -144,17 +158,36 @@ export default function Festivals() {
                     </div>
                   </div>
 
-                  {/* Right: CTA */}
+                  {/* Right: Lineup & CTA */}
                   <div className="flex flex-col justify-between">
-                    <div></div>
-                    <a
-                      href={festival.ticketmasterUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary justify-center w-full flex items-center gap-2"
-                    >
-                      Get Tickets <ArrowRight className="w-4 h-4" />
-                    </a>
+                    {/* Lineup */}
+                    <div className="bg-noir/50 border border-white/10 rounded-lg p-4 mb-4">
+                      <p className="font-body text-xs text-white/60 mb-2 uppercase tracking-wider">
+                        Lineup
+                      </p>
+                      <p className="font-body text-sm text-white/80">
+                        {festival.lineup}
+                      </p>
+                    </div>
+                    {/* Dual Ticket Links */}
+                    <div className="space-y-2">
+                      <a
+                        href={festival.ticketmasterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary justify-center w-full flex items-center gap-2"
+                      >
+                        Get Tickets <ArrowRight className="w-4 h-4" />
+                      </a>
+                      <a
+                        href={festival.stubhubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-noir/50 hover:text-gold text-xs transition-colors flex items-center justify-center gap-1 py-2"
+                      >
+                        Sold out? Find resale on StubHub →
+                      </a>
+                    </div>
                   </div>
                 </div>
               </motion.div>
