@@ -13,8 +13,8 @@
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { MapPin, ArrowRight, ChevronRight, Music, Mail, Calendar } from "lucide-react";
-import { useState } from "react";
+import { MapPin, ArrowRight, ChevronRight, Music, Mail, Calendar, Heart } from "lucide-react";
+import { useState, useEffect } from "react";
 
 /* ── Fade-in animation ── */
 const fade = {
@@ -77,6 +77,24 @@ const partners = ["SPIN", "Live Nation", "HBO", "Capital One", "Verizon", "Honda
 export default function Home() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  // Load favorites from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('concertFavorites');
+    if (saved) setFavorites(JSON.parse(saved));
+  }, []);
+
+  // Save favorites to localStorage
+  const toggleFavorite = (eventId: string) => {
+    const updated = favorites.includes(eventId)
+      ? favorites.filter(id => id !== eventId)
+      : [...favorites, eventId];
+    setFavorites(updated);
+    localStorage.setItem('concertFavorites', JSON.stringify(updated));
+  };
+
+  const isFavorited = (eventId: string) => favorites.includes(eventId);
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -210,10 +228,23 @@ export default function Home() {
 
                         {/* Right: Genre & CTA */}
                         <div className="flex flex-col items-start md:items-end gap-2 md:justify-end">
-                          <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-3">
                             <span className="text-gold text-xs uppercase tracking-wider font-semibold whitespace-nowrap">
                               {event.genre}
                             </span>
+                            <button
+                              onClick={() => toggleFavorite(`${event.artist}-${event.venue}`)}
+                              className="p-1.5 hover:bg-noir/5 rounded transition-colors flex-shrink-0"
+                              title={isFavorited(`${event.artist}-${event.venue}`) ? "Remove from favorites" : "Add to favorites"}
+                            >
+                              <Heart
+                                className={`w-4 h-4 transition-colors ${
+                                  isFavorited(`${event.artist}-${event.venue}`)
+                                    ? 'fill-gold text-gold'
+                                    : 'text-noir/30 hover:text-gold'
+                                }`}
+                              />
+                            </button>
                             <a
                               href={event.ticketmasterUrl}
                               target="_blank"
