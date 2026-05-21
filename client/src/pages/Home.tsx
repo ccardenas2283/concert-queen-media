@@ -33,29 +33,29 @@ const VENUE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663497210246/cD3s
 /* ── Data ── */
 const thisWeekShows = [
   {
-    fullDate: "Saturday, April 12",
-    dateShort: "Apr 12",
+    fullDate: "Wednesday, May 20",
+    dateShort: "May 20",
     events: [
       { artist: "Seismic Dance Event 8.0", venue: "The Concourse Project", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
   {
-    fullDate: "Friday, April 18",
-    dateShort: "Apr 18",
+    fullDate: "Thursday, May 21",
+    dateShort: "May 21",
     events: [
       { artist: "Adam Beyer", venue: "Kingdom Austin", genre: "Techno", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
   {
-    fullDate: "Saturday, May 3",
-    dateShort: "May 3",
+    fullDate: "Friday, May 22",
+    dateShort: "May 22",
     events: [
       { artist: "Simon Doty", venue: "The Venue ATX", genre: "Progressive House", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
   },
   {
-    fullDate: "Wednesday, May 15",
-    dateShort: "May 15",
+    fullDate: "Saturday, May 23",
+    dateShort: "May 23",
     events: [
       { artist: "Boys Noize", venue: "Empire Control Room", genre: "Electronic", ticketmasterUrl: "https://www.ticketmaster.com", stubhubUrl: "https://www.stubhub.com/search?q=" },
     ]
