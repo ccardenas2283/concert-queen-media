@@ -165,7 +165,80 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 2: THIS WEEK'S SHOWS — PRIMARY CONVERSION DRIVER */}
+      {/* SECTION 2: JUST ANNOUNCED — NEW SHOWS */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 bg-noir">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <p className="text-gold font-semibold text-sm uppercase tracking-widest mb-4">
+              New Releases
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+              Just Announced
+            </h2>
+            <p className="font-body text-base text-white/60">
+              Fresh announcements. Get tickets before they sell out.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { artist: "[ARTIST 1]", venue: "[VENUE 1]", date: "[DATE]", genre: "[GENRE]", ticketmasterUrl: "https://www.ticketmaster.com" },
+              { artist: "[ARTIST 2]", venue: "[VENUE 2]", date: "[DATE]", genre: "[GENRE]", ticketmasterUrl: "https://www.ticketmaster.com" },
+              { artist: "[ARTIST 3]", venue: "[VENUE 3]", date: "[DATE]", genre: "[GENRE]", ticketmasterUrl: "https://www.ticketmaster.com" },
+              { artist: "[ARTIST 4]", venue: "[VENUE 4]", date: "[DATE]", genre: "[GENRE]", ticketmasterUrl: "https://www.ticketmaster.com" },
+            ].map((show, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.08, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-gold/50 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <h4 className="font-display text-lg font-bold text-white group-hover:text-gold transition-colors">
+                      {show.artist}
+                    </h4>
+                    <p className="text-white/60 text-sm flex items-center gap-1 mt-1">
+                      <MapPin className="w-3 h-3" />
+                      {show.venue}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => toggleFavorite(`announced-${idx}`)}
+                    className="text-white/40 hover:text-gold transition-colors"
+                    aria-label="Add to favorites"
+                  >
+                    <Heart className={`w-5 h-5 ${isFavorited(`announced-${idx}`) ? 'fill-gold text-gold' : ''}`} />
+                  </button>
+                </div>
+                <p className="text-gold text-xs uppercase tracking-wider font-semibold mb-4">
+                  {show.date} • {show.genre}
+                </p>
+                <a
+                  href={show.ticketmasterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors font-semibold text-sm"
+                >
+                  Get Tickets <ArrowRight className="w-3 h-3" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/* SECTION 3: THIS WEEK'S SHOWS — PRIMARY CONVERSION DRIVER */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section id="shows" className="py-24 bg-white">
         <div className="container">
