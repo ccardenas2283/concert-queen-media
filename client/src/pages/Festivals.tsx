@@ -1,6 +1,7 @@
 /*
  * FESTIVALS PAGE: Austin Festival Guide
  * All major festivals with Ticketmaster links and insider coverage
+ * Hover effect reveals lineup preview
  */
 
 import { motion } from "framer-motion";
@@ -109,6 +110,7 @@ const genres = ["Multi-Genre", "Indie Rock", "Electronic"];
 export default function Festivals() {
   const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [hoveredFestival, setHoveredFestival] = useState<number | null>(null);
 
   const toggleMonth = (month: string) => {
     setSelectedMonths(prev =>
@@ -243,7 +245,9 @@ export default function Festivals() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.08, duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="bg-white/5 border border-white/10 rounded-lg p-8 hover:border-gold/50 hover:bg-white/8 transition-all"
+                  onMouseEnter={() => setHoveredFestival(idx)}
+                  onMouseLeave={() => setHoveredFestival(null)}
+                  className="bg-white/5 border border-white/10 rounded-lg p-8 hover:border-gold/50 hover:bg-white/8 transition-all cursor-pointer relative overflow-hidden"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Left: Festival Info */}
@@ -285,18 +289,48 @@ export default function Festivals() {
                     </div>
 
                     {/* Right: Lineup & CTA */}
-                    <div className="flex flex-col justify-between">
-                      {/* Lineup */}
-                      <div className="bg-noir/50 border border-white/10 rounded-lg p-4 mb-4">
-                        <p className="font-body text-xs text-white/60 mb-2 uppercase tracking-wider">
-                          Lineup
-                        </p>
-                        <p className="font-body text-sm text-white/80">
-                          {festival.lineup}
-                        </p>
-                      </div>
+                    <div className="flex flex-col justify-between relative">
+                      {/* Lineup - Visible by default, hidden on hover */}
+                      {hoveredFestival !== idx && (
+                        <motion.div
+                          initial={{ opacity: 1 }}
+                          animate={{ opacity: hoveredFestival === idx ? 0 : 1 }}
+                          transition={{ duration: 0.3 }}
+                          className="bg-noir/50 border border-white/10 rounded-lg p-4 mb-4"
+                        >
+                          <p className="font-body text-xs text-white/60 mb-2 uppercase tracking-wider">
+                            Lineup
+                          </p>
+                          <p className="font-body text-sm text-white/80">
+                            {festival.lineup}
+                          </p>
+                        </motion.div>
+                      )}
+
+                      {/* Hover Preview Overlay */}
+                      {hoveredFestival === idx && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 bg-gradient-to-br from-noir/95 via-noir/90 to-noir/95 rounded-lg p-8 flex flex-col justify-center backdrop-blur-sm border border-gold/30"
+                        >
+                          <h3 className="font-display text-2xl font-bold text-gold mb-4">
+                            Lineup Preview
+                          </h3>
+                          <p className="font-body text-white/90 mb-6 leading-relaxed text-sm">
+                            {festival.lineup}
+                          </p>
+                          <div className="flex items-center gap-2 text-gold font-body text-sm font-semibold">
+                            <span>Hover to explore</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
+                        </motion.div>
+                      )}
+
                       {/* Dual Ticket Links */}
-                      <div className="space-y-2">
+                      <div className="space-y-2 relative z-10">
                         <a
                           href={festival.ticketmasterUrl}
                           target="_blank"
@@ -334,11 +368,8 @@ export default function Festivals() {
           <p className="font-body text-lg text-white/70 mb-8">
             Get festival announcements, lineup drops, and ticket presales in your inbox.
           </p>
-          <a
-            href="/#email"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            Subscribe to Updates <ArrowRight className="w-4 h-4" />
+          <a href="/#email" className="btn-primary">
+            Subscribe to Updates
           </a>
         </div>
       </section>
